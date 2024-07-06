@@ -43,16 +43,18 @@ dependencies:
   get_it: ^7.6.4
   go_router: ^14.2.0
   google_fonts: ^6.2.1
-  injectable_generator: null
+  injectable: ^2.4.2
   responsive_builder: ^0.7.1
   shimmer: ^3.0.0
 
 dev_dependencies:
   bloc_test: ^9.1.6
+  build_runner: ^2.4.6
   flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
   freezed: ^2.4.5
+  injectable_generator: null
   json_serializable: ^6.7.1
   mocktail: ^1.0.3
   very_good_analysis: ^5.1.0
