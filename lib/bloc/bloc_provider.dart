@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kro_banking/bloc/bloc/authentication_bloc.dart';
+import 'package:kro_banking/bloc/authentication/authentication_bloc.dart';
+import 'package:kro_banking/bloc/bloc/loading_bloc.dart';
 import 'package:kro_banking/repository/authentication.dart';
 
 class AppBlocProvider extends StatelessWidget {
@@ -13,6 +14,9 @@ class AppBlocProvider extends StatelessWidget {
   ) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => LoadingBloc(),
+        ),
         BlocProvider(
           create: (context) =>
               AuthenticationBloc(context.read<AuthenticationRepository>())
