@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kro_banking/bloc/bloc_provider.dart';
 import 'package:kro_banking/repository/repository_provider.dart';
+import 'package:kro_banking/router/router.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -9,12 +10,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppRepositoriesProvider(
       child: AppBlocProvider(
-        child: MaterialApp(
-          home: Scaffold(
-            appBar: AppBar(
-              title: const Text("tesinog "),
-            ),
-          ),
+        child: MaterialApp.router(
+          routeInformationProvider: AppRouter.router.routeInformationProvider,
+          routerDelegate: AppRouter.instance.routerDelegate,
+          routeInformationParser: AppRouter.instance.routeInformationParser,
         ),
         // child: MaterialApp.router(
         //   theme: AppTheme.theme,

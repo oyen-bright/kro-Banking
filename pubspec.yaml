@@ -48,6 +48,7 @@ dependencies:
   injectable: ^2.4.2
   responsive_builder: ^0.7.1
   shimmer: ^3.0.0
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   bloc_test: ^9.1.6
