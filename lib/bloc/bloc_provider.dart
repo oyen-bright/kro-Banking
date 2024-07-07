@@ -18,6 +18,7 @@ class AppBlocProvider extends StatelessWidget {
           create: (context) => LoadingBloc(),
         ),
         BlocProvider(
+          lazy: false,
           create: (context) =>
               AuthenticationBloc(context.read<AuthenticationRepository>())
                 ..add(const AuthenticationEvent.started()),
