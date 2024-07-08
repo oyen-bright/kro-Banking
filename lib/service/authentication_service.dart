@@ -7,7 +7,8 @@ class AuthenticationService {
 
   Future<void> signInWithEmailAndPassword(String email, String password) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      throw "smd";
+      // await _auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
       rethrow;
     }

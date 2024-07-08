@@ -18,7 +18,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   AppRouter.instance;
+
   configureInjection();
 
   runApp(const App());

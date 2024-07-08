@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kro_banking/router/route.dart';
 import 'package:kro_banking/views/layout/layout_view.dart';
+import 'package:kro_banking/views/login/login_view.dart';
 
 part './routes/account.dart';
 part './routes/auth.dart';
@@ -57,7 +58,7 @@ class AppRouter {
     ];
     router = GoRouter(
       navigatorKey: parentNavigatorKey,
-      initialLocation: AppRoutes.home,
+      initialLocation: AppRoutes.login,
       routes: routes,
       errorBuilder: (context, state) {
         return Center(
@@ -76,6 +77,16 @@ class AppRouter {
           ),
         );
       },
+    );
+  }
+
+  static Page setupPage({
+    required Widget child,
+    required GoRouterState state,
+  }) {
+    return MaterialPage(
+      key: state.pageKey,
+      child: child,
     );
   }
 

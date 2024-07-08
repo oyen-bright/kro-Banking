@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:kro_banking/bloc/error/error_bloc.dart';
+import 'package:kro_banking/bloc/loading/loading_bloc.dart';
 import 'package:kro_banking/repository/authentication.dart';
 
 part 'authentication_bloc.freezed.dart';
@@ -14,9 +16,11 @@ class AuthenticationBloc
     extends HydratedBloc<AuthenticationEvent, AuthenticationState> {
   late final FirebaseAuth _firebaseAuth;
   final AuthenticationRepository _authRepository;
+  final LoadingBloc _loadingBloc;
+  final ErrorBloc _errorBloc;
   late StreamSubscription<User?> _authSubscription;
 
-  AuthenticationBloc(this._authRepository)
+  AuthenticationBloc(this._authRepository, this._loadingBloc, this._errorBloc)
       : super(const AuthenticationState.unknown()) {
     on<_Started>(_onStarted);
     on<_LoggedOut>(_onLoggedOut);
@@ -54,6 +58,19 @@ class AuthenticationBloc
     } else {
       emit(const AuthenticationState.unauthenticated());
     }
+  }
+
+  //Log userIN and return e
+  void loginWithEmailPassword(String email, String password) async {
+    _loadingBloc.add(const LoadingEvent.loading());
+
+    _authRepository.signIn(email, password).then((res) {
+      _loadingBloc.add(const LoadingEvent.loaded());
+
+      if (res != null) {
+        _errorBloc.add(ErrorEvent.showError(res));
+      }
+    });
   }
 
   @override
