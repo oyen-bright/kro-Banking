@@ -34,6 +34,7 @@ class AuthenticationBloc
 
   void _onStarted(_Started event, Emitter<AuthenticationState> emit) {
     final user = _firebaseAuth.currentUser;
+
     if (user != null) {
       emit(const AuthenticationState.authenticated());
     } else {

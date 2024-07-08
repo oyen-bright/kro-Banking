@@ -23,6 +23,7 @@ class App extends StatelessWidget {
             child: Builder(builder: (context) {
               return AppBlocListeners(
                 child: MaterialApp.router(
+                  debugShowCheckedModeBanner: false,
                   theme: AppTheme.theme,
                   routeInformationProvider:
                       AppRouter.router.routeInformationProvider,
