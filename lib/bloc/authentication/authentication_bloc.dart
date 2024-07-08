@@ -60,7 +60,6 @@ class AuthenticationBloc
     }
   }
 
-  //Log userIN and return e
   void loginWithEmailPassword(String email, String password) async {
     _loadingBloc.add(const LoadingEvent.loading());
 

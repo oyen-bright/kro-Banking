@@ -17,6 +17,8 @@ class AuthenticationRepository implements _AuthenticationRepository {
   Future<String?> signIn(String email, String password) async {
     try {
       await _authenticationService.signInWithEmailAndPassword(email, password);
+    } on FirebaseAuthException catch (e) {
+      return _getMessageFromErrorCode(e);
     } catch (e) {
       logger(e);
       return e.toString();
@@ -26,6 +28,16 @@ class AuthenticationRepository implements _AuthenticationRepository {
 
   static void logger(e) {
     log(e.toString(), name: "AuthRepo Error");
+  }
+
+  static String _getMessageFromErrorCode(FirebaseAuthException e) {
+    switch (e.code) {
+      case "invalid-credential":
+        return "Username or password is invalid";
+
+      default:
+        return e.message ?? "";
+    }
   }
 
   @override

@@ -1,7 +1,9 @@
 library app_router;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kro_banking/bloc/authentication/authentication_bloc.dart';
 import 'package:kro_banking/router/route.dart';
 import 'package:kro_banking/views/layout/layout_view.dart';
 import 'package:kro_banking/views/login/login_view.dart';
