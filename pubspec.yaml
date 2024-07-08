@@ -52,6 +52,7 @@ dependencies:
   relative_scale: ^2.0.0
   responsive_builder: ^0.7.1
   shimmer: ^3.0.0
+  syncfusion_flutter_charts: ^26.1.40
   toastification: ^2.0.0
   url_strategy: ^0.2.0
 
