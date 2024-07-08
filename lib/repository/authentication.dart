@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kro_banking/service/authentication_service.dart';
 
@@ -12,11 +14,29 @@ class AuthenticationRepository implements _AuthenticationRepository {
   AuthenticationRepository(this._authenticationService);
 
   @override
-  Future<void> signIn(String email, String password) async {
+  Future<String?> signIn(String email, String password) async {
     try {
       await _authenticationService.signInWithEmailAndPassword(email, password);
+    } on FirebaseAuthException catch (e) {
+      return _getMessageFromErrorCode(e);
     } catch (e) {
-      rethrow;
+      logger(e);
+      return e.toString();
+    }
+    return null;
+  }
+
+  static void logger(e) {
+    log(e.toString(), name: "AuthRepo Error");
+  }
+
+  static String _getMessageFromErrorCode(FirebaseAuthException e) {
+    switch (e.code) {
+      case "invalid-credential":
+        return "Username or password is invalid";
+
+      default:
+        return e.message ?? "";
     }
   }
 
