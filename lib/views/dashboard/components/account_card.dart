@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/model/account.dart';
+import 'package:kro_banking/theme/app_colors.dart';
 import 'package:kro_banking/utils/currency_formater.dart';
 
 class AccountCard extends StatefulWidget {
@@ -32,6 +33,7 @@ class AccountCard extends StatefulWidget {
 class _AccountCardState extends State<AccountCard> {
   bool isVisible = false;
 
+  final increase = Random().nextInt(50);
   late final String amount;
 
   @override
@@ -49,7 +51,7 @@ class _AccountCardState extends State<AccountCard> {
     return Container(
       width: 425,
       decoration: BoxDecoration(
-          color: context.colorScheme.secondary,
+          color: AppColors.kBgWhite,
           borderRadius: BorderRadius.circular(KContents.kRadius.medium)),
       padding: padding,
       height: cardHeight,
@@ -61,8 +63,8 @@ class _AccountCardState extends State<AccountCard> {
               Text(
                 widget.account.type,
                 style: context.textTheme.titleMedium?.copyWith(
-                  color: context.colorScheme.onPrimary,
-                ),
+                    color: context.colorScheme.primary,
+                    fontWeight: FontWeight.w600),
               ),
               const Spacer(),
               IconButton(
@@ -73,7 +75,7 @@ class _AccountCardState extends State<AccountCard> {
                     isVisible
                         ? FontAwesomeIcons.eyeSlash
                         : FontAwesomeIcons.eye,
-                    color: context.colorScheme.onPrimary,
+                    color: context.colorScheme.primary,
                   ))
             ],
           ),
@@ -81,9 +83,11 @@ class _AccountCardState extends State<AccountCard> {
             flex: 2,
           ),
           Text(
-            "${KContents.kAppCurrency} ${isVisible ? amount : "*" * amount.length}",
+            // appCurrency(widget.account.balance, false),
+            // "${KContents.kAppCurrency} ${isVisible ? amount : "*" * amount.length}",
+            "${KContents.kAppCurrency} ${isVisible ? appCurrency(widget.account.balance, false) : "*" * appCurrency(widget.account.balance, false).length}",
             style: context.textTheme.headlineLarge?.copyWith(
-                color: Colors.white,
+                color: Colors.black,
                 fontWeight: FontWeight.w800,
                 fontSize: fontSize),
           ),
@@ -98,7 +102,7 @@ class _AccountCardState extends State<AccountCard> {
                 Text(
                   "From last month",
                   style: context.textTheme.titleMedium?.copyWith(
-                    color: context.colorScheme.onPrimary,
+                    color: context.colorScheme.primary,
                   ),
                 ),
                 const Spacer(),
@@ -119,7 +123,7 @@ class _AccountCardState extends State<AccountCard> {
                         width: 10,
                       ),
                       Text(
-                        "%${Random().nextInt(50)}",
+                        "%$increase",
                         style: context.textTheme.bodyMedium?.copyWith(
                           color: context.colorScheme.onPrimary,
                         ),

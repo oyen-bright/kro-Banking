@@ -91,7 +91,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     }
 
     if (state is _Loading) {
-      emit(_Loaded(
+      emit(_Loading(
           accounts: event.accounts,
           bills: currentState.$2 ?? [],
           transactions: currentState.$3 ?? []));
@@ -112,7 +112,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     }
 
     if (state is _Loading) {
-      emit(_Loaded(
+      emit(_Loading(
           accounts: currentState.$1 ?? [],
           bills: currentState.$2 ?? [],
           transactions: event.transaction));

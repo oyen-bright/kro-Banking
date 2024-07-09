@@ -47,13 +47,14 @@ class DashboardView extends StatelessWidget {
                   if (isLoading || data.$1 == null)
                     ...List.generate(
                       3,
-                      (_) => AppShimmer(
-                          child: AccountCard.regular(account: Account.dummy)),
+                      (_) => AccountCard.regular(account: Account.dummy),
                     )
                   else
-                    ...data.$1!.map((account) => AccountCard.regular(
-                          account: account,
-                        ))
+                    ...data.$1!.map((account) {
+                      return AccountCard.regular(
+                        account: account,
+                      );
+                    })
                 ],
               ),
               const SizedBox(
