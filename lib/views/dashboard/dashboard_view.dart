@@ -48,10 +48,10 @@ class DashboardView extends StatelessWidget {
                     ...List.generate(
                       3,
                       (_) => AppShimmer(
-                          child: AccountCard(account: Account.dummy)),
+                          child: AccountCard.regular(account: Account.dummy)),
                     )
                   else
-                    ...data.$1!.map((account) => AccountCard(
+                    ...data.$1!.map((account) => AccountCard.regular(
                           account: account,
                         ))
                 ],

@@ -23,7 +23,7 @@ class ViewWrapper extends StatelessWidget {
             // height: 2,
             width: double.infinity,
             child: Text(
-              "Dashboard",
+              headerTitle,
               style: context.textTheme.headlineMedium
                   ?.copyWith(fontWeight: FontWeight.w400),
             ),

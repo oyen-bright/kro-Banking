@@ -6,11 +6,24 @@ import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/model/account.dart';
 import 'package:kro_banking/utils/currency_formater.dart';
-import 'package:kro_banking/widgets/app_shimer.dart';
 
 class AccountCard extends StatefulWidget {
   final Account account;
-  const AccountCard({super.key, required this.account});
+  final bool isSmall;
+
+  const AccountCard._internal({
+    super.key,
+    required this.account,
+    this.isSmall = false,
+  });
+
+  factory AccountCard.small({required Account account}) {
+    return AccountCard._internal(account: account, isSmall: true);
+  }
+
+  factory AccountCard.regular({required Account account}) {
+    return AccountCard._internal(account: account);
+  }
 
   @override
   State<AccountCard> createState() => _AccountCardState();
@@ -18,8 +31,6 @@ class AccountCard extends StatefulWidget {
 
 class _AccountCardState extends State<AccountCard> {
   bool isVisible = false;
-
-  Widget get shimmer => AppShimmer(child: AccountCard(account: widget.account));
 
   late final String amount;
 
@@ -31,13 +42,17 @@ class _AccountCardState extends State<AccountCard> {
 
   @override
   Widget build(BuildContext context) {
+    final double cardHeight = widget.isSmall ? 150 : 250;
+    const double fontSize = 32;
+    const EdgeInsetsGeometry padding = KContents.kCardPad;
+
     return Container(
       width: 425,
       decoration: BoxDecoration(
           color: context.colorScheme.secondary,
           borderRadius: BorderRadius.circular(KContents.kRadius.medium)),
-      padding: KContents.kCardPad,
-      height: 250,
+      padding: padding,
+      height: cardHeight,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -51,7 +66,6 @@ class _AccountCardState extends State<AccountCard> {
               ),
               const Spacer(),
               IconButton(
-                  // tooltip: "Toggle Visibility",
                   onPressed: () => setState(() {
                         isVisible = !isVisible;
                       }),
@@ -68,51 +82,54 @@ class _AccountCardState extends State<AccountCard> {
           ),
           Text(
             "${KContents.kAppCurrency} ${isVisible ? amount : "*" * amount.length}",
-            style: context.textTheme.headlineLarge
-                ?.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
+            style: context.textTheme.headlineLarge?.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w800,
+                fontSize: fontSize),
           ),
           const Spacer(),
-          const Divider(),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Text(
-                "From last month",
-                style: context.textTheme.titleMedium?.copyWith(
-                  color: context.colorScheme.onPrimary,
+          if (!widget.isSmall) ...[
+            const Divider(),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Text(
+                  "From last month",
+                  style: context.textTheme.titleMedium?.copyWith(
+                    color: context.colorScheme.onPrimary,
+                  ),
                 ),
-              ),
-              const Spacer(),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                decoration: BoxDecoration(
-                    color: context.colorScheme.primary,
-                    borderRadius: BorderRadius.circular(5)),
-                child: Row(
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.arrowTrendUp,
-                      size: 15,
-                      color: context.colorScheme.onPrimary,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      //TODO:remove static calculation
-                      "%${Random().nextInt(50)}",
-                      style: context.textTheme.bodyMedium?.copyWith(
+                const Spacer(),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                      color: context.colorScheme.primary,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Row(
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.arrowTrendUp,
+                        size: 15,
                         color: context.colorScheme.onPrimary,
                       ),
-                    )
-                  ],
-                ),
-              )
-            ],
-          )
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "%${Random().nextInt(50)}",
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          color: context.colorScheme.onPrimary,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            )
+          ],
         ],
       ),
     );
