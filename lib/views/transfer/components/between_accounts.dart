@@ -9,6 +9,7 @@ import 'package:kro_banking/model/account.dart';
 import 'package:kro_banking/utils/currency_formater.dart';
 import 'package:kro_banking/views/transfer/components/confirm_transfer.dart';
 import 'package:kro_banking/widgets/buttons/app_elevated_button.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class BetweenAccount extends StatefulWidget {
   const BetweenAccount({super.key});
@@ -49,25 +50,43 @@ class _BetweenAccountState extends State<BetweenAccount> {
           accounts = state.data.$1!;
         }
 
-        return Row(
-          children: [
-            _buildBetweenAccount(context, controller),
-            const Padding(
-              padding: KContents.kCardPad,
-              child: VerticalDivider(),
-            ),
-            _buildTransferSummary(context, controller),
-          ],
-        );
+        return ResponsiveBuilder(builder: (context, device) {
+          if (device.isDesktop) {
+            return Row(
+              children: [
+                _buildBetweenAccount(context, controller, 3),
+                const Padding(
+                  padding: KContents.kCardPad,
+                  child: VerticalDivider(),
+                ),
+                _buildTransferSummary(context, controller, 2),
+              ],
+            );
+          } else {
+            return Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                _buildBetweenAccount(context, controller, 0),
+                const SizedBox(
+                  height: 50,
+                ),
+                const Divider(),
+                const SizedBox(
+                  height: 20,
+                ),
+                _buildTransferSummary(context, controller, 1),
+              ],
+            );
+          }
+        });
       },
     );
   }
 
-//TODO: relative builder
   Expanded _buildTransferSummary(
-      BuildContext context, TextEditingController controller) {
+      BuildContext context, TextEditingController controller, int flex) {
     return Expanded(
-      flex: 1,
+      flex: flex,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -185,9 +204,9 @@ class _BetweenAccountState extends State<BetweenAccount> {
   }
 
   Expanded _buildBetweenAccount(
-      BuildContext context, TextEditingController controller) {
+      BuildContext context, TextEditingController controller, int flex) {
     return Expanded(
-      flex: 2,
+      flex: flex,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -285,7 +304,8 @@ class _BetweenAccountState extends State<BetweenAccount> {
                 ),
               ),
             ),
-          const SizedBox(height: 17),
+
+          // const SizedBox(height: 17),
         ],
       ),
     );
