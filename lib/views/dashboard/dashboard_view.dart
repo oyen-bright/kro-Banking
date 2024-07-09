@@ -24,7 +24,7 @@ class DashboardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewWrapper(
-      headerTitle: "Desktop",
+      headerTitle: "Dashboard",
       child: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
           final (List<Account>?, List<Bill>?, List<Transaction>?) data =
