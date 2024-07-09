@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kro_banking/injection.dart';
+import 'package:kro_banking/repository/account.dart';
 import 'package:kro_banking/repository/authentication.dart';
+import 'package:kro_banking/service/account.dart';
 import 'package:kro_banking/service/authentication_service.dart';
 
 class AppRepositoriesProvider extends StatelessWidget {
@@ -16,6 +18,10 @@ class AppRepositoriesProvider extends StatelessWidget {
           lazy: true,
           create: (context) =>
               AuthenticationRepository(getIt<AuthenticationService>()),
+        ),
+        RepositoryProvider<AccountRepository>(
+          lazy: true,
+          create: (context) => AccountRepository(getIt<AccountService>()),
         ),
       ],
       child: child,
