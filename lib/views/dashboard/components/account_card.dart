@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
+import 'package:kro_banking/model/account.dart';
 import 'package:kro_banking/widgets/app_shimer.dart';
 
 class AccountCard extends StatefulWidget {
-  const AccountCard({super.key});
+  final Account account;
+  const AccountCard({super.key, required this.account});
 
   @override
   State<AccountCard> createState() => _AccountCardState();
@@ -14,7 +16,7 @@ class AccountCard extends StatefulWidget {
 class _AccountCardState extends State<AccountCard> {
   bool isVisible = false;
 
-  static Widget get shimmmer => const AppShimmer(child: AccountCard());
+  Widget get shimmer => AppShimmer(child: AccountCard(account: widget.account));
 
   @override
   Widget build(BuildContext context) {

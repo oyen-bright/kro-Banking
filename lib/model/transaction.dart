@@ -5,6 +5,7 @@ class Transaction {
   final double amount;
   final String type;
   final double balance;
+  final String accountId;
 
   Transaction({
     required this.id,
@@ -13,6 +14,7 @@ class Transaction {
     required this.amount,
     required this.type,
     required this.balance,
+    required this.accountId,
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class Transaction {
       amount: (json['amount'] ?? 0.0).toDouble(),
       type: json['type'] ?? '',
       balance: (json['balance'] ?? 0.0).toDouble(),
+      accountId: json['accountId'] ?? '',
     );
   }
 
@@ -34,16 +37,19 @@ class Transaction {
       'amount': amount,
       'type': type,
       'balance': balance,
+      'accountId': accountId,
     };
   }
 
   static Transaction get dummy {
     return Transaction(
-        balance: 0000.0,
-        id: '1',
-        description: '*************',
-        amount: 000.0,
-        type: "********",
-        dateTime: DateTime.now());
+      id: '1',
+      dateTime: DateTime.now(),
+      description: 'Sample Transaction',
+      amount: 100.0,
+      type: 'Expense',
+      balance: 500.0,
+      accountId: 'xyz123',
+    );
   }
 }
