@@ -20,7 +20,7 @@ class Transaction {
   factory Transaction.fromJson(Map<String, dynamic> json) {
     return Transaction(
       id: json['id'] ?? '',
-      dateTime: DateTime.parse(json['dateTime'] ?? ''),
+      dateTime: DateTime.parse(json['date'] ?? ''),
       description: json['description'] ?? '',
       amount: (json['amount'] ?? 0.0).toDouble(),
       type: json['type'] ?? '',
@@ -32,7 +32,7 @@ class Transaction {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'dateTime': dateTime.toIso8601String(),
+      'date': dateTime.toIso8601String(),
       'description': description,
       'amount': amount,
       'type': type,
@@ -45,7 +45,7 @@ class Transaction {
     return Transaction(
       id: '1',
       dateTime: DateTime.now(),
-      description: 'Sample Transaction',
+      description: '+++++++++',
       amount: 100.0,
       type: 'Expense',
       balance: 500.0,

@@ -8,14 +8,14 @@ class AccountRepository {
 
   AccountRepository(this.accountService);
 
-  Future<(String?, List<Account>)> getAccounts(String userId) async {
+  Future<(String?, List<Account>?)> getAccounts(String userId) async {
     try {
       final response = await accountService.getAccounts(userId);
 
       return (null, response);
     } catch (e) {
       logger(e);
-      return (e.toString(), <Account>[]);
+      return (e.toString(), null);
     }
   }
 

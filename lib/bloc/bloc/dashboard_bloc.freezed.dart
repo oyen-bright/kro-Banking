@@ -21,6 +21,8 @@ mixin _$DashboardEvent {
     required TResult Function() started,
     required TResult Function() loadDashboard,
     required TResult Function(List<Account> accounts) onAccountDataChange,
+    required TResult Function(List<Transaction> transaction)
+        onTransactionDataChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +30,7 @@ mixin _$DashboardEvent {
     TResult? Function()? started,
     TResult? Function()? loadDashboard,
     TResult? Function(List<Account> accounts)? onAccountDataChange,
+    TResult? Function(List<Transaction> transaction)? onTransactionDataChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +38,7 @@ mixin _$DashboardEvent {
     TResult Function()? started,
     TResult Function()? loadDashboard,
     TResult Function(List<Account> accounts)? onAccountDataChange,
+    TResult Function(List<Transaction> transaction)? onTransactionDataChange,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +47,8 @@ mixin _$DashboardEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_LoadDashboard value) loadDashboard,
     required TResult Function(_AccountDataChange value) onAccountDataChange,
+    required TResult Function(_TransactionDataChange value)
+        onTransactionDataChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +56,7 @@ mixin _$DashboardEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_LoadDashboard value)? loadDashboard,
     TResult? Function(_AccountDataChange value)? onAccountDataChange,
+    TResult? Function(_TransactionDataChange value)? onTransactionDataChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +64,7 @@ mixin _$DashboardEvent {
     TResult Function(_Started value)? started,
     TResult Function(_LoadDashboard value)? loadDashboard,
     TResult Function(_AccountDataChange value)? onAccountDataChange,
+    TResult Function(_TransactionDataChange value)? onTransactionDataChange,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +129,8 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function() loadDashboard,
     required TResult Function(List<Account> accounts) onAccountDataChange,
+    required TResult Function(List<Transaction> transaction)
+        onTransactionDataChange,
   }) {
     return started();
   }
@@ -131,6 +141,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function()? loadDashboard,
     TResult? Function(List<Account> accounts)? onAccountDataChange,
+    TResult? Function(List<Transaction> transaction)? onTransactionDataChange,
   }) {
     return started?.call();
   }
@@ -141,6 +152,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function()? loadDashboard,
     TResult Function(List<Account> accounts)? onAccountDataChange,
+    TResult Function(List<Transaction> transaction)? onTransactionDataChange,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -155,6 +167,8 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_LoadDashboard value) loadDashboard,
     required TResult Function(_AccountDataChange value) onAccountDataChange,
+    required TResult Function(_TransactionDataChange value)
+        onTransactionDataChange,
   }) {
     return started(this);
   }
@@ -165,6 +179,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_LoadDashboard value)? loadDashboard,
     TResult? Function(_AccountDataChange value)? onAccountDataChange,
+    TResult? Function(_TransactionDataChange value)? onTransactionDataChange,
   }) {
     return started?.call(this);
   }
@@ -175,6 +190,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_LoadDashboard value)? loadDashboard,
     TResult Function(_AccountDataChange value)? onAccountDataChange,
+    TResult Function(_TransactionDataChange value)? onTransactionDataChange,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -229,6 +245,8 @@ class _$LoadDashboardImpl implements _LoadDashboard {
     required TResult Function() started,
     required TResult Function() loadDashboard,
     required TResult Function(List<Account> accounts) onAccountDataChange,
+    required TResult Function(List<Transaction> transaction)
+        onTransactionDataChange,
   }) {
     return loadDashboard();
   }
@@ -239,6 +257,7 @@ class _$LoadDashboardImpl implements _LoadDashboard {
     TResult? Function()? started,
     TResult? Function()? loadDashboard,
     TResult? Function(List<Account> accounts)? onAccountDataChange,
+    TResult? Function(List<Transaction> transaction)? onTransactionDataChange,
   }) {
     return loadDashboard?.call();
   }
@@ -249,6 +268,7 @@ class _$LoadDashboardImpl implements _LoadDashboard {
     TResult Function()? started,
     TResult Function()? loadDashboard,
     TResult Function(List<Account> accounts)? onAccountDataChange,
+    TResult Function(List<Transaction> transaction)? onTransactionDataChange,
     required TResult orElse(),
   }) {
     if (loadDashboard != null) {
@@ -263,6 +283,8 @@ class _$LoadDashboardImpl implements _LoadDashboard {
     required TResult Function(_Started value) started,
     required TResult Function(_LoadDashboard value) loadDashboard,
     required TResult Function(_AccountDataChange value) onAccountDataChange,
+    required TResult Function(_TransactionDataChange value)
+        onTransactionDataChange,
   }) {
     return loadDashboard(this);
   }
@@ -273,6 +295,7 @@ class _$LoadDashboardImpl implements _LoadDashboard {
     TResult? Function(_Started value)? started,
     TResult? Function(_LoadDashboard value)? loadDashboard,
     TResult? Function(_AccountDataChange value)? onAccountDataChange,
+    TResult? Function(_TransactionDataChange value)? onTransactionDataChange,
   }) {
     return loadDashboard?.call(this);
   }
@@ -283,6 +306,7 @@ class _$LoadDashboardImpl implements _LoadDashboard {
     TResult Function(_Started value)? started,
     TResult Function(_LoadDashboard value)? loadDashboard,
     TResult Function(_AccountDataChange value)? onAccountDataChange,
+    TResult Function(_TransactionDataChange value)? onTransactionDataChange,
     required TResult orElse(),
   }) {
     if (loadDashboard != null) {
@@ -371,6 +395,8 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
     required TResult Function() started,
     required TResult Function() loadDashboard,
     required TResult Function(List<Account> accounts) onAccountDataChange,
+    required TResult Function(List<Transaction> transaction)
+        onTransactionDataChange,
   }) {
     return onAccountDataChange(accounts);
   }
@@ -381,6 +407,7 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
     TResult? Function()? started,
     TResult? Function()? loadDashboard,
     TResult? Function(List<Account> accounts)? onAccountDataChange,
+    TResult? Function(List<Transaction> transaction)? onTransactionDataChange,
   }) {
     return onAccountDataChange?.call(accounts);
   }
@@ -391,6 +418,7 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
     TResult Function()? started,
     TResult Function()? loadDashboard,
     TResult Function(List<Account> accounts)? onAccountDataChange,
+    TResult Function(List<Transaction> transaction)? onTransactionDataChange,
     required TResult orElse(),
   }) {
     if (onAccountDataChange != null) {
@@ -405,6 +433,8 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
     required TResult Function(_Started value) started,
     required TResult Function(_LoadDashboard value) loadDashboard,
     required TResult Function(_AccountDataChange value) onAccountDataChange,
+    required TResult Function(_TransactionDataChange value)
+        onTransactionDataChange,
   }) {
     return onAccountDataChange(this);
   }
@@ -415,6 +445,7 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
     TResult? Function(_Started value)? started,
     TResult? Function(_LoadDashboard value)? loadDashboard,
     TResult? Function(_AccountDataChange value)? onAccountDataChange,
+    TResult? Function(_TransactionDataChange value)? onTransactionDataChange,
   }) {
     return onAccountDataChange?.call(this);
   }
@@ -425,6 +456,7 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
     TResult Function(_Started value)? started,
     TResult Function(_LoadDashboard value)? loadDashboard,
     TResult Function(_AccountDataChange value)? onAccountDataChange,
+    TResult Function(_TransactionDataChange value)? onTransactionDataChange,
     required TResult orElse(),
   }) {
     if (onAccountDataChange != null) {
@@ -442,6 +474,164 @@ abstract class _AccountDataChange implements DashboardEvent {
   @JsonKey(ignore: true)
   _$$AccountDataChangeImplCopyWith<_$AccountDataChangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TransactionDataChangeImplCopyWith<$Res> {
+  factory _$$TransactionDataChangeImplCopyWith(
+          _$TransactionDataChangeImpl value,
+          $Res Function(_$TransactionDataChangeImpl) then) =
+      __$$TransactionDataChangeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Transaction> transaction});
+}
+
+/// @nodoc
+class __$$TransactionDataChangeImplCopyWithImpl<$Res>
+    extends _$DashboardEventCopyWithImpl<$Res, _$TransactionDataChangeImpl>
+    implements _$$TransactionDataChangeImplCopyWith<$Res> {
+  __$$TransactionDataChangeImplCopyWithImpl(_$TransactionDataChangeImpl _value,
+      $Res Function(_$TransactionDataChangeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? transaction = null,
+  }) {
+    return _then(_$TransactionDataChangeImpl(
+      null == transaction
+          ? _value._transaction
+          : transaction // ignore: cast_nullable_to_non_nullable
+              as List<Transaction>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TransactionDataChangeImpl implements _TransactionDataChange {
+  const _$TransactionDataChangeImpl(final List<Transaction> transaction)
+      : _transaction = transaction;
+
+  final List<Transaction> _transaction;
+  @override
+  List<Transaction> get transaction {
+    if (_transaction is EqualUnmodifiableListView) return _transaction;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_transaction);
+  }
+
+  @override
+  String toString() {
+    return 'DashboardEvent.onTransactionDataChange(transaction: $transaction)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransactionDataChangeImpl &&
+            const DeepCollectionEquality()
+                .equals(other._transaction, _transaction));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_transaction));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TransactionDataChangeImplCopyWith<_$TransactionDataChangeImpl>
+      get copyWith => __$$TransactionDataChangeImplCopyWithImpl<
+          _$TransactionDataChangeImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() loadDashboard,
+    required TResult Function(List<Account> accounts) onAccountDataChange,
+    required TResult Function(List<Transaction> transaction)
+        onTransactionDataChange,
+  }) {
+    return onTransactionDataChange(transaction);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? loadDashboard,
+    TResult? Function(List<Account> accounts)? onAccountDataChange,
+    TResult? Function(List<Transaction> transaction)? onTransactionDataChange,
+  }) {
+    return onTransactionDataChange?.call(transaction);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? loadDashboard,
+    TResult Function(List<Account> accounts)? onAccountDataChange,
+    TResult Function(List<Transaction> transaction)? onTransactionDataChange,
+    required TResult orElse(),
+  }) {
+    if (onTransactionDataChange != null) {
+      return onTransactionDataChange(transaction);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_LoadDashboard value) loadDashboard,
+    required TResult Function(_AccountDataChange value) onAccountDataChange,
+    required TResult Function(_TransactionDataChange value)
+        onTransactionDataChange,
+  }) {
+    return onTransactionDataChange(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_LoadDashboard value)? loadDashboard,
+    TResult? Function(_AccountDataChange value)? onAccountDataChange,
+    TResult? Function(_TransactionDataChange value)? onTransactionDataChange,
+  }) {
+    return onTransactionDataChange?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_LoadDashboard value)? loadDashboard,
+    TResult Function(_AccountDataChange value)? onAccountDataChange,
+    TResult Function(_TransactionDataChange value)? onTransactionDataChange,
+    required TResult orElse(),
+  }) {
+    if (onTransactionDataChange != null) {
+      return onTransactionDataChange(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TransactionDataChange implements DashboardEvent {
+  const factory _TransactionDataChange(final List<Transaction> transaction) =
+      _$TransactionDataChangeImpl;
+
+  List<Transaction> get transaction;
+  @JsonKey(ignore: true)
+  _$$TransactionDataChangeImplCopyWith<_$TransactionDataChangeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

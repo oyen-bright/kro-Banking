@@ -6,4 +6,6 @@ class DashboardEvent with _$DashboardEvent {
   const factory DashboardEvent.loadDashboard() = _LoadDashboard;
   const factory DashboardEvent.onAccountDataChange(List<Account> accounts) =
       _AccountDataChange;
+  const factory DashboardEvent.onTransactionDataChange(
+      List<Transaction> transaction) = _TransactionDataChange;
 }
