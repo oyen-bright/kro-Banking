@@ -44,7 +44,7 @@ class _AccountCardState extends State<AccountCard> {
           Row(
             children: [
               Text(
-                "Available Balance",
+                widget.account.type,
                 style: context.textTheme.titleMedium?.copyWith(
                   color: context.colorScheme.onPrimary,
                 ),
