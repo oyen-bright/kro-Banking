@@ -9,6 +9,7 @@ import 'package:kro_banking/views/dashboard/components/account_card.dart';
 import 'package:kro_banking/views/dashboard/components/bill_card.dart';
 import 'package:kro_banking/views/dashboard/components/card_header.dart';
 import 'package:kro_banking/views/dashboard/components/investment_cart.dart';
+import 'package:kro_banking/views/dashboard/components/recent_transaction_tile.dart';
 import 'package:kro_banking/views/wrapper/view_wrapper.dart';
 
 class DashboardView extends StatelessWidget {
@@ -37,7 +38,7 @@ class DashboardView extends StatelessWidget {
           ),
           Wrap(
             runAlignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
+            crossAxisAlignment: WrapCrossAlignment.start,
             runSpacing: context.pHeight(KContents.kHorizontalPad),
             spacing: context.pWidth(KContents.kHorizontalPad),
             children: [
@@ -137,7 +138,39 @@ class DashboardView extends StatelessWidget {
                     ),
                   )
                 ],
-              )
+              ),
+              Container(
+                  // height: 100,
+                  padding: KContents.kCardPad,
+                  width: 425,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: context.colorScheme.primary.withOpacity(0.2)),
+                      color: AppColors.kBgWhite,
+                      borderRadius:
+                          BorderRadius.circular(KContents.kRadius.medium)),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        CardHeader(
+                          title: "Recent Transactions",
+                          buttonTitle: "View All",
+                          onPressed: () {
+                            AppRouter.router.go(AppRoutes.investments);
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const CardTile(),
+                        const CardTile(),
+                        const CardTile(),
+                        const CardTile(),
+                        const CardTile(),
+                        const CardTile(),
+                        const CardTile(),
+                        const CardTile(),
+                      ]))
             ],
           )
         ],
