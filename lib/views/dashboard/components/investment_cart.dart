@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -86,7 +87,7 @@ class _InvestmentChartState extends State<InvestmentChart> {
           minimum: 1,
           maximum: 1.35,
           interval: 0.05,
-          labelFormat: r'${value}',
+          labelFormat: '${KContents.kAppCurrency}{value}',
           axisLine: AxisLine(width: 0),
           majorTickLines: MajorTickLines(size: 0),
         ),

@@ -11,28 +11,33 @@ class CardTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDebit = transaction.isDebit;
-    return ListTile(
-      title: Text(
-        transaction.description,
-        maxLines: 1,
-      ),
-      subtitle: Text(
-        formatDate(transaction.dateTime),
-        maxLines: 1,
-      ),
-      trailing: Text(
-        appCurrency(transaction.amount),
-        style: context.textTheme.titleMedium,
-      ),
-      leading: Container(
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: !isDebit
-              ? Colors.green.withOpacity(0.2)
-              : Colors.red.withOpacity(0.2),
+    return Column(
+      children: [
+        ListTile(
+          title: Text(
+            transaction.description,
+            maxLines: 1,
+          ),
+          subtitle: Text(
+            formatDate(transaction.dateTime),
+            maxLines: 1,
+          ),
+          trailing: Text(
+            appCurrency(transaction.amount),
+            style: context.textTheme.titleMedium,
+          ),
+          leading: Container(
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: !isDebit
+                  ? Colors.green.withOpacity(0.2)
+                  : Colors.red.withOpacity(0.2),
+            ),
+            child: Icon(isDebit ? Icons.arrow_outward : Icons.arrow_back),
+          ),
         ),
-        child: Icon(isDebit ? Icons.arrow_outward : Icons.arrow_back),
-      ),
+        const Divider()
+      ],
     );
   }
 }

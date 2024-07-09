@@ -2,9 +2,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
+import 'package:kro_banking/utils/currency_formater.dart';
 
 class BillCard extends StatelessWidget {
-  const BillCard({super.key});
+  final String amount;
+  final String title;
+  const BillCard({super.key, required this.amount, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +26,12 @@ class BillCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Electricity",
+              title,
               maxLines: 1,
               style: context.textTheme.bodyLarge,
             ),
             AutoSizeText(
-              "\$40000",
+              appCurrency(double.parse(amount)),
               maxLines: 1,
               style: context.textTheme.bodyMedium,
             )
