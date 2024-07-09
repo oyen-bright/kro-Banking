@@ -41,15 +41,19 @@ class Transaction {
     };
   }
 
+  bool get isDebit {
+    return (amount.isNegative);
+  }
+
   static Transaction get dummy {
     return Transaction(
       id: '1',
       dateTime: DateTime.now(),
-      description: '+++++++++',
-      amount: 100.0,
+      description: "**********",
+      amount: 00000,
       type: 'Expense',
       balance: 500.0,
-      accountId: 'xyz123',
+      accountId: 'XXXXXXXX',
     );
   }
 }

@@ -1,20 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:kro_banking/extentions/on_context.dart';
+import 'package:kro_banking/model/transaction.dart';
+import 'package:kro_banking/utils/currency_formater.dart';
+import 'package:kro_banking/utils/date_formater.dart';
 
 class CardTile extends StatelessWidget {
-  const CardTile({super.key});
+  const CardTile({super.key, required this.transaction});
+  final Transaction transaction;
 
   @override
   Widget build(BuildContext context) {
+    bool isDebit = transaction.isDebit;
     return ListTile(
-      title: const Text("Rent"),
-      subtitle: const Text("15th May 2021"),
-      trailing: const Text("\$30000"),
+      title: Text(
+        transaction.description,
+        maxLines: 1,
+      ),
+      subtitle: Text(
+        formatDate(transaction.dateTime),
+        maxLines: 1,
+      ),
+      trailing: Text(
+        appCurrency(transaction.amount),
+        style: context.textTheme.titleMedium,
+      ),
       leading: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: Colors.red.withOpacity(0.2),
+          color: !isDebit
+              ? Colors.green.withOpacity(0.2)
+              : Colors.red.withOpacity(0.2),
         ),
-        child: const Icon(Icons.arrow_outward),
+        child: Icon(isDebit ? Icons.arrow_outward : Icons.arrow_back),
       ),
     );
   }

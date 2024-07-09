@@ -60,123 +60,124 @@ class DashboardView extends StatelessWidget {
                 height: KContents.kHorizontalPad,
               ),
               Wrap(
-                runAlignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.start,
-                runSpacing: context.pHeight(KContents.kHorizontalPad),
-                spacing: context.pWidth(KContents.kHorizontalPad),
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        // height: 100,
-                        padding: KContents.kCardPad,
-                        width: 880,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: context.colorScheme.primary
-                                    .withOpacity(0.2)),
-                            color: AppColors.kBgWhite,
-                            borderRadius: BorderRadius.circular(
-                                KContents.kRadius.medium)),
-                        child: Column(
-                          // crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            CardHeader(
-                              title: "Recurring Bills",
-                              buttonTitle: "View All",
-                              onPressed: () {
-                                AppRouter.router.go(AppRoutes.billPayments);
-                              },
-                            ),
-                            const SizedBox(
-                              height: KContents.kCardPadVertical,
-                            ),
-                            Wrap(
-                              runAlignment: WrapAlignment.center,
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              runSpacing:
-                                  context.pHeight(KContents.kHorizontalPad),
-                              spacing: context.pWidth(KContents.kHorizontalPad),
-                              children: const [
-                                BillCard(),
-                                BillCard(),
-                                BillCard(),
-                              ],
-                            )
-                          ],
+                  runAlignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  runSpacing: context.pHeight(KContents.kHorizontalPad),
+                  spacing: context.pWidth(KContents.kHorizontalPad),
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          // height: 100,
+                          padding: KContents.kCardPad,
+                          width: 880,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: context.colorScheme.primary
+                                      .withOpacity(0.2)),
+                              color: AppColors.kBgWhite,
+                              borderRadius: BorderRadius.circular(
+                                  KContents.kRadius.medium)),
+                          child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              CardHeader(
+                                title: "Recurring Bills",
+                                buttonTitle: "View All",
+                                onPressed: () {
+                                  AppRouter.router.go(AppRoutes.billPayments);
+                                },
+                              ),
+                              const SizedBox(
+                                height: KContents.kCardPadVertical,
+                              ),
+                              Wrap(
+                                runAlignment: WrapAlignment.center,
+                                crossAxisAlignment: WrapCrossAlignment.center,
+                                runSpacing:
+                                    context.pHeight(KContents.kHorizontalPad),
+                                spacing:
+                                    context.pWidth(KContents.kHorizontalPad),
+                                children: const [
+                                  BillCard(),
+                                  BillCard(),
+                                  BillCard(),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: KContents.kHorizontalPad,
-                      ),
-                      Container(
-                        // height: 100,
-                        padding: KContents.kCardPad,
-                        width: 880,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: context.colorScheme.primary
-                                    .withOpacity(0.2)),
-                            color: AppColors.kBgWhite,
-                            borderRadius: BorderRadius.circular(
-                                KContents.kRadius.medium)),
+                        const SizedBox(
+                          height: KContents.kHorizontalPad,
+                        ),
+                        Container(
+                          // height: 100,
+                          padding: KContents.kCardPad,
+                          width: 880,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: context.colorScheme.primary
+                                      .withOpacity(0.2)),
+                              color: AppColors.kBgWhite,
+                              borderRadius: BorderRadius.circular(
+                                  KContents.kRadius.medium)),
 
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            CardHeader(
-                              title: "Investment Breakdown",
-                              buttonTitle: "More Details",
-                              onPressed: () {
-                                AppRouter.router.go(AppRoutes.investments);
-                              },
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Return",
-                                  style: context.textTheme.headlineSmall
-                                      ?.copyWith(
-                                          color: context.colorScheme.primary),
-                                ),
-                                const Icon(
-                                  FontAwesomeIcons.caretUp,
-                                  color: Colors.green,
-                                  size: 30,
-                                ),
-                                Text(
-                                  "40%",
-                                  style:
-                                      context.textTheme.headlineSmall?.copyWith(
-                                    color: Colors.green,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              CardHeader(
+                                title: "Investment Breakdown",
+                                buttonTitle: "More Details",
+                                onPressed: () {
+                                  AppRouter.router.go(AppRoutes.investments);
+                                },
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Return",
+                                    style: context.textTheme.headlineSmall
+                                        ?.copyWith(
+                                            color: context.colorScheme.primary),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            const InvestmentChart(),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Container(
-                      // height: 100,
-                      padding: KContents.kCardPad,
-                      width: 425,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color:
-                                  context.colorScheme.primary.withOpacity(0.2)),
-                          color: AppColors.kBgWhite,
-                          borderRadius:
-                              BorderRadius.circular(KContents.kRadius.medium)),
-                      child: Column(
+                                  const Icon(
+                                    FontAwesomeIcons.caretUp,
+                                    color: Colors.green,
+                                    size: 30,
+                                  ),
+                                  Text(
+                                    "40%",
+                                    style: context.textTheme.headlineSmall
+                                        ?.copyWith(
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const InvestmentChart(),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    Container(
+                        // height: 100,
+                        padding: KContents.kCardPad,
+                        width: 425,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: context.colorScheme.primary
+                                    .withOpacity(0.2)),
+                            color: AppColors.kBgWhite,
+                            borderRadius: BorderRadius.circular(
+                                KContents.kRadius.medium)),
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             CardHeader(
@@ -189,17 +190,22 @@ class DashboardView extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            const CardTile(),
-                            const CardTile(),
-                            const CardTile(),
-                            const CardTile(),
-                            const CardTile(),
-                            const CardTile(),
-                            const CardTile(),
-                            const CardTile(),
-                          ]))
-                ],
-              )
+                            if (isLoading || data.$3 == null)
+                              ...List.generate(
+                                15,
+                                (_) => AppShimmer(
+                                    child: CardTile(
+                                        transaction: Transaction.dummy)),
+                              )
+                            else
+                              ...data.$3!
+                                  .take(10)
+                                  .map((transaction) => CardTile(
+                                        transaction: transaction,
+                                      ))
+                          ],
+                        ))
+                  ])
             ],
           );
         },

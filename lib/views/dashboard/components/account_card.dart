@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/model/account.dart';
+import 'package:kro_banking/utils/currency_formater.dart';
 import 'package:kro_banking/widgets/app_shimer.dart';
 
 class AccountCard extends StatefulWidget {
@@ -18,10 +21,16 @@ class _AccountCardState extends State<AccountCard> {
 
   Widget get shimmer => AppShimmer(child: AccountCard(account: widget.account));
 
+  late final String amount;
+
+  @override
+  void initState() {
+    amount = appCurrency(widget.account.balance, false);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    const amount = "1000020";
-
     return Container(
       width: 425,
       decoration: BoxDecoration(
@@ -58,7 +67,7 @@ class _AccountCardState extends State<AccountCard> {
             flex: 2,
           ),
           Text(
-            "\$ ${isVisible ? amount : "*" * amount.length}",
+            "${KContents.kAppCurrency} ${isVisible ? amount : "*" * amount.length}",
             style: context.textTheme.headlineLarge
                 ?.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
           ),
@@ -93,7 +102,8 @@ class _AccountCardState extends State<AccountCard> {
                       width: 10,
                     ),
                     Text(
-                      "%20",
+                      //TODO:remove static calculation
+                      "%${Random().nextInt(50)}",
                       style: context.textTheme.bodyMedium?.copyWith(
                         color: context.colorScheme.onPrimary,
                       ),
