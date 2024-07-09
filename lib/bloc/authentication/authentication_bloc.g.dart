@@ -8,11 +8,13 @@ part of 'authentication_bloc.dart';
 
 _$AuthenticatedImpl _$$AuthenticatedImplFromJson(Map<String, dynamic> json) =>
     _$AuthenticatedImpl(
+      KroUser.fromJson(json['user'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$AuthenticatedImplToJson(_$AuthenticatedImpl instance) =>
     <String, dynamic>{
+      'user': instance.user,
       'runtimeType': instance.$type,
     };
 

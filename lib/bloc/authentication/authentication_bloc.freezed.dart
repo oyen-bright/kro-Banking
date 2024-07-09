@@ -625,21 +625,21 @@ AuthenticationState _$AuthenticationStateFromJson(Map<String, dynamic> json) {
 mixin _$AuthenticationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() authenticated,
+    required TResult Function(KroUser user) authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function() unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? authenticated,
+    TResult? Function(KroUser user)? authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function()? unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? authenticated,
+    TResult Function(KroUser user)? authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -693,6 +693,8 @@ abstract class _$$AuthenticatedImplCopyWith<$Res> {
   factory _$$AuthenticatedImplCopyWith(
           _$AuthenticatedImpl value, $Res Function(_$AuthenticatedImpl) then) =
       __$$AuthenticatedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({KroUser user});
 }
 
 /// @nodoc
@@ -702,65 +704,90 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
   __$$AuthenticatedImplCopyWithImpl(
       _$AuthenticatedImpl _value, $Res Function(_$AuthenticatedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_$AuthenticatedImpl(
+      null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as KroUser,
+    ));
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$AuthenticatedImpl implements _Authenticated {
-  const _$AuthenticatedImpl({final String? $type})
-      : $type = $type ?? 'authenticated';
+class _$AuthenticatedImpl extends _Authenticated {
+  const _$AuthenticatedImpl(this.user, {final String? $type})
+      : $type = $type ?? 'authenticated',
+        super._();
 
   factory _$AuthenticatedImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthenticatedImplFromJson(json);
+
+  @override
+  final KroUser user;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'AuthenticationState.authenticated()';
+    return 'AuthenticationState.authenticated(user: $user)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AuthenticatedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$AuthenticatedImpl &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthenticatedImplCopyWith<_$AuthenticatedImpl> get copyWith =>
+      __$$AuthenticatedImplCopyWithImpl<_$AuthenticatedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() authenticated,
+    required TResult Function(KroUser user) authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function() unknown,
   }) {
-    return authenticated();
+    return authenticated(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? authenticated,
+    TResult? Function(KroUser user)? authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function()? unknown,
   }) {
-    return authenticated?.call();
+    return authenticated?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? authenticated,
+    TResult Function(KroUser user)? authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated();
+      return authenticated(user);
     }
     return orElse();
   }
@@ -807,11 +834,17 @@ class _$AuthenticatedImpl implements _Authenticated {
   }
 }
 
-abstract class _Authenticated implements AuthenticationState {
-  const factory _Authenticated() = _$AuthenticatedImpl;
+abstract class _Authenticated extends AuthenticationState {
+  const factory _Authenticated(final KroUser user) = _$AuthenticatedImpl;
+  const _Authenticated._() : super._();
 
   factory _Authenticated.fromJson(Map<String, dynamic> json) =
       _$AuthenticatedImpl.fromJson;
+
+  KroUser get user;
+  @JsonKey(ignore: true)
+  _$$AuthenticatedImplCopyWith<_$AuthenticatedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -847,9 +880,10 @@ class __$$UnauthenticatedImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UnauthenticatedImpl implements _Unauthenticated {
+class _$UnauthenticatedImpl extends _Unauthenticated {
   const _$UnauthenticatedImpl({this.message, final String? $type})
-      : $type = $type ?? 'unauthenticated';
+      : $type = $type ?? 'unauthenticated',
+        super._();
 
   factory _$UnauthenticatedImpl.fromJson(Map<String, dynamic> json) =>
       _$$UnauthenticatedImplFromJson(json);
@@ -887,7 +921,7 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() authenticated,
+    required TResult Function(KroUser user) authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function() unknown,
   }) {
@@ -897,7 +931,7 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? authenticated,
+    TResult? Function(KroUser user)? authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function()? unknown,
   }) {
@@ -907,7 +941,7 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? authenticated,
+    TResult Function(KroUser user)? authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -960,9 +994,10 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
   }
 }
 
-abstract class _Unauthenticated implements AuthenticationState {
+abstract class _Unauthenticated extends AuthenticationState {
   const factory _Unauthenticated({final String? message}) =
       _$UnauthenticatedImpl;
+  const _Unauthenticated._() : super._();
 
   factory _Unauthenticated.fromJson(Map<String, dynamic> json) =
       _$UnauthenticatedImpl.fromJson;
@@ -991,8 +1026,10 @@ class __$$UnknownImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UnknownImpl implements _Unknown {
-  const _$UnknownImpl({final String? $type}) : $type = $type ?? 'unknown';
+class _$UnknownImpl extends _Unknown {
+  const _$UnknownImpl({final String? $type})
+      : $type = $type ?? 'unknown',
+        super._();
 
   factory _$UnknownImpl.fromJson(Map<String, dynamic> json) =>
       _$$UnknownImplFromJson(json);
@@ -1018,7 +1055,7 @@ class _$UnknownImpl implements _Unknown {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() authenticated,
+    required TResult Function(KroUser user) authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function() unknown,
   }) {
@@ -1028,7 +1065,7 @@ class _$UnknownImpl implements _Unknown {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? authenticated,
+    TResult? Function(KroUser user)? authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function()? unknown,
   }) {
@@ -1038,7 +1075,7 @@ class _$UnknownImpl implements _Unknown {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? authenticated,
+    TResult Function(KroUser user)? authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -1091,8 +1128,9 @@ class _$UnknownImpl implements _Unknown {
   }
 }
 
-abstract class _Unknown implements AuthenticationState {
+abstract class _Unknown extends AuthenticationState {
   const factory _Unknown() = _$UnknownImpl;
+  const _Unknown._() : super._();
 
   factory _Unknown.fromJson(Map<String, dynamic> json) = _$UnknownImpl.fromJson;
 }
