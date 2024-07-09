@@ -62,14 +62,16 @@ class _LayoutHeaderState extends State<LayoutHeader> {
                     style: context.textTheme.titleMedium?.copyWith(
                         fontSize:
                             context.textTheme.titleMedium!.fontSize! + 2.0),
-                  ).animate(effects: [const FadeEffect()]),
+                  ).animate().slideX(),
                 const Spacer(),
                 IconButton(
                     onPressed: () =>
                         widget.scaffoldKey.currentState?.openEndDrawer(),
                     icon: const Icon(FontAwesomeIcons.bell)),
                 Row(
-                  children: [
+                  children: AnimateList(interval: 200.ms, effects: [
+                    FadeEffect(duration: 100.ms)
+                  ], children: [
                     CircleAvatar(
                       radius: 20,
                       child: Image.network(KContents.kProfileIcon),
@@ -79,13 +81,13 @@ class _LayoutHeaderState extends State<LayoutHeader> {
                         width: 1.sw,
                       ),
                       Text(
-                        "its Aha",
+                        "Oyen ",
                         style: context.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                       )
                     }
-                  ].animate(effects: [const FadeEffect()]),
+                  ]),
                 )
               ],
             );

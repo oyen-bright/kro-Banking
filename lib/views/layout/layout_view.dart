@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/views/layout/components/header.dart';
@@ -40,12 +41,12 @@ class Layout extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: context.pWidth(KContents.kHorizontalPad)),
-                      child: child,
+                      child: child.animate().slideX(),
                     ),
                   )),
                 ],
               ),
-            ),
+            )
           ],
         ),
       );

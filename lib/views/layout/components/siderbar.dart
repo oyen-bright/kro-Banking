@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kro_banking/constants/app_constants.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/router/route.dart';
 import 'package:kro_banking/router/router.dart';
@@ -8,7 +8,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 final menuItems = [
   {'title': 'Dashboard', 'icon': Icons.dashboard, 'route': AppRoutes.home},
-  {'title': 'Account', 'icon': Icons.wallet, 'route': AppRoutes.accounts},
   {
     'title': 'Transfer',
     'icon': Icons.savings,
@@ -19,6 +18,7 @@ final menuItems = [
     'icon': Icons.input,
     'route': AppRoutes.transactionHistory
   },
+  {'title': 'Account', 'icon': Icons.wallet, 'route': AppRoutes.accounts},
   {'title': 'Bills', 'icon': Icons.payment, 'route': AppRoutes.billPayments},
   {
     'title': 'Investment',
@@ -48,7 +48,9 @@ class LayoutSideBar extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: context.pWidth(30)),
               child: Text(
-                KContents.kAppName.toUpperCase(),
+                // KContents.kAppName.toUpperCase(),
+
+                "",
                 maxLines: 1,
                 style: context.textTheme.headlineMedium?.copyWith(
                   color: context.colorScheme.primary,
@@ -95,7 +97,7 @@ class LayoutSideBar extends StatelessWidget {
                           : _buildItem(
                               context, isSelected, route, item, device, title),
                     ),
-                  );
+                  ).animate().slideX();
                 },
               ),
             ),
