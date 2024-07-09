@@ -23,7 +23,8 @@ class AppRepositoriesProvider extends StatelessWidget {
         ),
         RepositoryProvider<AccountRepository>(
           lazy: true,
-          create: (context) => AccountRepository(getIt<AccountService>()),
+          create: (context) => AccountRepository(
+              getIt<AccountService>(), getIt<TransactionService>()),
         ),
         RepositoryProvider<TransactionRepository>(
           lazy: true,

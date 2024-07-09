@@ -61,13 +61,33 @@ class AppBlocListeners extends StatelessWidget {
         ),
         BlocListener<ErrorBloc, ErrorState>(
           listener: (context, state) {
-            state.whenOrNull(errorMessage: (message) {
+            state.whenOrNull(errorMessage: (message, type) {
               if (context.mounted) {
-                toastification.show(
-                  icon: const Icon(FontAwesomeIcons.circleInfo),
-                  title: Text(message),
-                  autoCloseDuration: const Duration(seconds: 5),
-                );
+                toastification.dismissAll();
+                switch (type) {
+                  case NotificationType.loading:
+                    toastification.show(
+                      icon: const Icon(FontAwesomeIcons.circleInfo),
+                      title: Text(message),
+                      autoCloseDuration: const Duration(seconds: 10),
+                    );
+                    break;
+                  case NotificationType.error:
+                    toastification.show(
+                      icon: const Icon(FontAwesomeIcons.circleInfo),
+                      title: Text(message),
+                      backgroundColor: Colors.red,
+                      autoCloseDuration: const Duration(seconds: 5),
+                    );
+                    break;
+                  case NotificationType.notify:
+                    toastification.show(
+                      icon: const Icon(FontAwesomeIcons.circleInfo),
+                      title: Text(message),
+                      autoCloseDuration: const Duration(seconds: 5),
+                    );
+                    break;
+                }
               }
             });
           },

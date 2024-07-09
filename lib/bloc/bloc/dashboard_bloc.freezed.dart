@@ -20,6 +20,8 @@ mixin _$DashboardEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() loadDashboard,
+    required TResult Function(Account from, Account to, double amount)
+        transferBetweenAccounts,
     required TResult Function(List<Account> accounts) onAccountDataChange,
     required TResult Function(List<Transaction> transaction)
         onTransactionDataChange,
@@ -29,6 +31,8 @@ mixin _$DashboardEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? loadDashboard,
+    TResult? Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
     TResult? Function(List<Account> accounts)? onAccountDataChange,
     TResult? Function(List<Transaction> transaction)? onTransactionDataChange,
   }) =>
@@ -37,6 +41,8 @@ mixin _$DashboardEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? loadDashboard,
+    TResult Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
     TResult Function(List<Account> accounts)? onAccountDataChange,
     TResult Function(List<Transaction> transaction)? onTransactionDataChange,
     required TResult orElse(),
@@ -46,6 +52,8 @@ mixin _$DashboardEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_LoadDashboard value) loadDashboard,
+    required TResult Function(_TransferBetweenAccounts value)
+        transferBetweenAccounts,
     required TResult Function(_AccountDataChange value) onAccountDataChange,
     required TResult Function(_TransactionDataChange value)
         onTransactionDataChange,
@@ -55,6 +63,7 @@ mixin _$DashboardEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_LoadDashboard value)? loadDashboard,
+    TResult? Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
     TResult? Function(_AccountDataChange value)? onAccountDataChange,
     TResult? Function(_TransactionDataChange value)? onTransactionDataChange,
   }) =>
@@ -63,6 +72,7 @@ mixin _$DashboardEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_LoadDashboard value)? loadDashboard,
+    TResult Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
     TResult Function(_AccountDataChange value)? onAccountDataChange,
     TResult Function(_TransactionDataChange value)? onTransactionDataChange,
     required TResult orElse(),
@@ -128,6 +138,8 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() loadDashboard,
+    required TResult Function(Account from, Account to, double amount)
+        transferBetweenAccounts,
     required TResult Function(List<Account> accounts) onAccountDataChange,
     required TResult Function(List<Transaction> transaction)
         onTransactionDataChange,
@@ -140,6 +152,8 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? loadDashboard,
+    TResult? Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
     TResult? Function(List<Account> accounts)? onAccountDataChange,
     TResult? Function(List<Transaction> transaction)? onTransactionDataChange,
   }) {
@@ -151,6 +165,8 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? loadDashboard,
+    TResult Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
     TResult Function(List<Account> accounts)? onAccountDataChange,
     TResult Function(List<Transaction> transaction)? onTransactionDataChange,
     required TResult orElse(),
@@ -166,6 +182,8 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_LoadDashboard value) loadDashboard,
+    required TResult Function(_TransferBetweenAccounts value)
+        transferBetweenAccounts,
     required TResult Function(_AccountDataChange value) onAccountDataChange,
     required TResult Function(_TransactionDataChange value)
         onTransactionDataChange,
@@ -178,6 +196,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_LoadDashboard value)? loadDashboard,
+    TResult? Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
     TResult? Function(_AccountDataChange value)? onAccountDataChange,
     TResult? Function(_TransactionDataChange value)? onTransactionDataChange,
   }) {
@@ -189,6 +208,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_LoadDashboard value)? loadDashboard,
+    TResult Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
     TResult Function(_AccountDataChange value)? onAccountDataChange,
     TResult Function(_TransactionDataChange value)? onTransactionDataChange,
     required TResult orElse(),
@@ -244,6 +264,8 @@ class _$LoadDashboardImpl implements _LoadDashboard {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() loadDashboard,
+    required TResult Function(Account from, Account to, double amount)
+        transferBetweenAccounts,
     required TResult Function(List<Account> accounts) onAccountDataChange,
     required TResult Function(List<Transaction> transaction)
         onTransactionDataChange,
@@ -256,6 +278,8 @@ class _$LoadDashboardImpl implements _LoadDashboard {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? loadDashboard,
+    TResult? Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
     TResult? Function(List<Account> accounts)? onAccountDataChange,
     TResult? Function(List<Transaction> transaction)? onTransactionDataChange,
   }) {
@@ -267,6 +291,8 @@ class _$LoadDashboardImpl implements _LoadDashboard {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? loadDashboard,
+    TResult Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
     TResult Function(List<Account> accounts)? onAccountDataChange,
     TResult Function(List<Transaction> transaction)? onTransactionDataChange,
     required TResult orElse(),
@@ -282,6 +308,8 @@ class _$LoadDashboardImpl implements _LoadDashboard {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_LoadDashboard value) loadDashboard,
+    required TResult Function(_TransferBetweenAccounts value)
+        transferBetweenAccounts,
     required TResult Function(_AccountDataChange value) onAccountDataChange,
     required TResult Function(_TransactionDataChange value)
         onTransactionDataChange,
@@ -294,6 +322,7 @@ class _$LoadDashboardImpl implements _LoadDashboard {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_LoadDashboard value)? loadDashboard,
+    TResult? Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
     TResult? Function(_AccountDataChange value)? onAccountDataChange,
     TResult? Function(_TransactionDataChange value)? onTransactionDataChange,
   }) {
@@ -305,6 +334,7 @@ class _$LoadDashboardImpl implements _LoadDashboard {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_LoadDashboard value)? loadDashboard,
+    TResult Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
     TResult Function(_AccountDataChange value)? onAccountDataChange,
     TResult Function(_TransactionDataChange value)? onTransactionDataChange,
     required TResult orElse(),
@@ -318,6 +348,186 @@ class _$LoadDashboardImpl implements _LoadDashboard {
 
 abstract class _LoadDashboard implements DashboardEvent {
   const factory _LoadDashboard() = _$LoadDashboardImpl;
+}
+
+/// @nodoc
+abstract class _$$TransferBetweenAccountsImplCopyWith<$Res> {
+  factory _$$TransferBetweenAccountsImplCopyWith(
+          _$TransferBetweenAccountsImpl value,
+          $Res Function(_$TransferBetweenAccountsImpl) then) =
+      __$$TransferBetweenAccountsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Account from, Account to, double amount});
+}
+
+/// @nodoc
+class __$$TransferBetweenAccountsImplCopyWithImpl<$Res>
+    extends _$DashboardEventCopyWithImpl<$Res, _$TransferBetweenAccountsImpl>
+    implements _$$TransferBetweenAccountsImplCopyWith<$Res> {
+  __$$TransferBetweenAccountsImplCopyWithImpl(
+      _$TransferBetweenAccountsImpl _value,
+      $Res Function(_$TransferBetweenAccountsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? from = null,
+    Object? to = null,
+    Object? amount = null,
+  }) {
+    return _then(_$TransferBetweenAccountsImpl(
+      null == from
+          ? _value.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as Account,
+      null == to
+          ? _value.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as Account,
+      null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TransferBetweenAccountsImpl implements _TransferBetweenAccounts {
+  const _$TransferBetweenAccountsImpl(this.from, this.to, this.amount);
+
+  @override
+  final Account from;
+  @override
+  final Account to;
+  @override
+  final double amount;
+
+  @override
+  String toString() {
+    return 'DashboardEvent.transferBetweenAccounts(from: $from, to: $to, amount: $amount)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransferBetweenAccountsImpl &&
+            (identical(other.from, from) || other.from == from) &&
+            (identical(other.to, to) || other.to == to) &&
+            (identical(other.amount, amount) || other.amount == amount));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, from, to, amount);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TransferBetweenAccountsImplCopyWith<_$TransferBetweenAccountsImpl>
+      get copyWith => __$$TransferBetweenAccountsImplCopyWithImpl<
+          _$TransferBetweenAccountsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() loadDashboard,
+    required TResult Function(Account from, Account to, double amount)
+        transferBetweenAccounts,
+    required TResult Function(List<Account> accounts) onAccountDataChange,
+    required TResult Function(List<Transaction> transaction)
+        onTransactionDataChange,
+  }) {
+    return transferBetweenAccounts(from, to, amount);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? loadDashboard,
+    TResult? Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
+    TResult? Function(List<Account> accounts)? onAccountDataChange,
+    TResult? Function(List<Transaction> transaction)? onTransactionDataChange,
+  }) {
+    return transferBetweenAccounts?.call(from, to, amount);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? loadDashboard,
+    TResult Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
+    TResult Function(List<Account> accounts)? onAccountDataChange,
+    TResult Function(List<Transaction> transaction)? onTransactionDataChange,
+    required TResult orElse(),
+  }) {
+    if (transferBetweenAccounts != null) {
+      return transferBetweenAccounts(from, to, amount);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_LoadDashboard value) loadDashboard,
+    required TResult Function(_TransferBetweenAccounts value)
+        transferBetweenAccounts,
+    required TResult Function(_AccountDataChange value) onAccountDataChange,
+    required TResult Function(_TransactionDataChange value)
+        onTransactionDataChange,
+  }) {
+    return transferBetweenAccounts(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_LoadDashboard value)? loadDashboard,
+    TResult? Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
+    TResult? Function(_AccountDataChange value)? onAccountDataChange,
+    TResult? Function(_TransactionDataChange value)? onTransactionDataChange,
+  }) {
+    return transferBetweenAccounts?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_LoadDashboard value)? loadDashboard,
+    TResult Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
+    TResult Function(_AccountDataChange value)? onAccountDataChange,
+    TResult Function(_TransactionDataChange value)? onTransactionDataChange,
+    required TResult orElse(),
+  }) {
+    if (transferBetweenAccounts != null) {
+      return transferBetweenAccounts(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TransferBetweenAccounts implements DashboardEvent {
+  const factory _TransferBetweenAccounts(
+          final Account from, final Account to, final double amount) =
+      _$TransferBetweenAccountsImpl;
+
+  Account get from;
+  Account get to;
+  double get amount;
+  @JsonKey(ignore: true)
+  _$$TransferBetweenAccountsImplCopyWith<_$TransferBetweenAccountsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -394,6 +604,8 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() loadDashboard,
+    required TResult Function(Account from, Account to, double amount)
+        transferBetweenAccounts,
     required TResult Function(List<Account> accounts) onAccountDataChange,
     required TResult Function(List<Transaction> transaction)
         onTransactionDataChange,
@@ -406,6 +618,8 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? loadDashboard,
+    TResult? Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
     TResult? Function(List<Account> accounts)? onAccountDataChange,
     TResult? Function(List<Transaction> transaction)? onTransactionDataChange,
   }) {
@@ -417,6 +631,8 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? loadDashboard,
+    TResult Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
     TResult Function(List<Account> accounts)? onAccountDataChange,
     TResult Function(List<Transaction> transaction)? onTransactionDataChange,
     required TResult orElse(),
@@ -432,6 +648,8 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_LoadDashboard value) loadDashboard,
+    required TResult Function(_TransferBetweenAccounts value)
+        transferBetweenAccounts,
     required TResult Function(_AccountDataChange value) onAccountDataChange,
     required TResult Function(_TransactionDataChange value)
         onTransactionDataChange,
@@ -444,6 +662,7 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_LoadDashboard value)? loadDashboard,
+    TResult? Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
     TResult? Function(_AccountDataChange value)? onAccountDataChange,
     TResult? Function(_TransactionDataChange value)? onTransactionDataChange,
   }) {
@@ -455,6 +674,7 @@ class _$AccountDataChangeImpl implements _AccountDataChange {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_LoadDashboard value)? loadDashboard,
+    TResult Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
     TResult Function(_AccountDataChange value)? onAccountDataChange,
     TResult Function(_TransactionDataChange value)? onTransactionDataChange,
     required TResult orElse(),
@@ -552,6 +772,8 @@ class _$TransactionDataChangeImpl implements _TransactionDataChange {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() loadDashboard,
+    required TResult Function(Account from, Account to, double amount)
+        transferBetweenAccounts,
     required TResult Function(List<Account> accounts) onAccountDataChange,
     required TResult Function(List<Transaction> transaction)
         onTransactionDataChange,
@@ -564,6 +786,8 @@ class _$TransactionDataChangeImpl implements _TransactionDataChange {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? loadDashboard,
+    TResult? Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
     TResult? Function(List<Account> accounts)? onAccountDataChange,
     TResult? Function(List<Transaction> transaction)? onTransactionDataChange,
   }) {
@@ -575,6 +799,8 @@ class _$TransactionDataChangeImpl implements _TransactionDataChange {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? loadDashboard,
+    TResult Function(Account from, Account to, double amount)?
+        transferBetweenAccounts,
     TResult Function(List<Account> accounts)? onAccountDataChange,
     TResult Function(List<Transaction> transaction)? onTransactionDataChange,
     required TResult orElse(),
@@ -590,6 +816,8 @@ class _$TransactionDataChangeImpl implements _TransactionDataChange {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_LoadDashboard value) loadDashboard,
+    required TResult Function(_TransferBetweenAccounts value)
+        transferBetweenAccounts,
     required TResult Function(_AccountDataChange value) onAccountDataChange,
     required TResult Function(_TransactionDataChange value)
         onTransactionDataChange,
@@ -602,6 +830,7 @@ class _$TransactionDataChangeImpl implements _TransactionDataChange {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_LoadDashboard value)? loadDashboard,
+    TResult? Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
     TResult? Function(_AccountDataChange value)? onAccountDataChange,
     TResult? Function(_TransactionDataChange value)? onTransactionDataChange,
   }) {
@@ -613,6 +842,7 @@ class _$TransactionDataChangeImpl implements _TransactionDataChange {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_LoadDashboard value)? loadDashboard,
+    TResult Function(_TransferBetweenAccounts value)? transferBetweenAccounts,
     TResult Function(_AccountDataChange value)? onAccountDataChange,
     TResult Function(_TransactionDataChange value)? onTransactionDataChange,
     required TResult orElse(),

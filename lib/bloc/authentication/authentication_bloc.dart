@@ -72,7 +72,7 @@ class AuthenticationBloc
       _loadingBloc.add(const LoadingEvent.loaded());
 
       if (res != null) {
-        _errorBloc.add(ErrorEvent.showError(res));
+        _errorBloc.add(ErrorEvent.showError(res, type: NotificationType.error));
       }
     });
   }
