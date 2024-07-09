@@ -17,7 +17,9 @@ class Layout extends StatelessWidget {
     return ResponsiveBuilder(builder: (context, device) {
       return Scaffold(
         key: _scaffoldKey,
-        endDrawer: const Drawer(),
+        endDrawer: const Drawer(
+          shape: RoundedRectangleBorder(),
+        ),
         drawer: LayoutSideBar(device: device),
         body: Row(
           children: [

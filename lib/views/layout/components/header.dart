@@ -10,12 +10,31 @@ import 'package:kro_banking/utils/get_greetings.dart';
 import 'package:kro_banking/widgets/linear_loader.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class LayoutHeader extends StatelessWidget {
+class LayoutHeader extends StatefulWidget {
   const LayoutHeader({
     super.key,
     required this.scaffoldKey,
   });
   final GlobalKey<ScaffoldState> scaffoldKey;
+
+  @override
+  State<LayoutHeader> createState() => _LayoutHeaderState();
+}
+
+bool showGreetings = true;
+
+class _LayoutHeaderState extends State<LayoutHeader> {
+  @override
+  void initState() {
+    Future.delayed(5.seconds, () {
+      if (mounted) {
+        setState(() {
+          showGreetings = false;
+        });
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +53,20 @@ class LayoutHeader extends StatelessWidget {
               children: [
                 if (device.isMobile)
                   IconButton(
-                      onPressed: () => scaffoldKey.currentState?.openDrawer(),
+                      onPressed: () =>
+                          widget.scaffoldKey.currentState?.openDrawer(),
                       icon: const Icon(Icons.menu)),
-                Text(
-                  "${getGreeting()}, User",
-                  style: context.textTheme.titleMedium?.copyWith(
-                      fontSize: context.textTheme.titleMedium!.fontSize! + 2.0),
-                ),
+                if (showGreetings)
+                  Text(
+                    "${getGreeting()}, User",
+                    style: context.textTheme.titleMedium?.copyWith(
+                        fontSize:
+                            context.textTheme.titleMedium!.fontSize! + 2.0),
+                  ).animate(effects: [const FadeEffect()]),
                 const Spacer(),
                 IconButton(
-                    onPressed: () => scaffoldKey.currentState?.openEndDrawer(),
+                    onPressed: () =>
+                        widget.scaffoldKey.currentState?.openEndDrawer(),
                     icon: const Icon(FontAwesomeIcons.bell)),
                 Row(
                   children: [
@@ -62,7 +85,7 @@ class LayoutHeader extends StatelessWidget {
                         ),
                       )
                     }
-                  ],
+                  ].animate(effects: [const FadeEffect()]),
                 )
               ],
             );

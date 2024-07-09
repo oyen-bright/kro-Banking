@@ -8,6 +8,7 @@ import 'package:kro_banking/router/route.dart';
 import 'package:kro_banking/views/dashboard/dashboard_view.dart';
 import 'package:kro_banking/views/layout/layout_view.dart';
 import 'package:kro_banking/views/login/login_view.dart';
+import 'package:kro_banking/views/transactions/transaction_view.dart';
 import 'package:kro_banking/views/transfer/transfer_view.dart';
 
 part './routes/account.dart';
