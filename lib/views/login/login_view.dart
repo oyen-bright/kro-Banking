@@ -8,6 +8,7 @@ import 'package:kro_banking/bloc/authentication/authentication_bloc.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/mixins/validation.dart';
+import 'package:kro_banking/theme/app_colors.dart';
 import 'package:kro_banking/theme/app_images.dart';
 import 'package:kro_banking/widgets/buttons/app_elevated_button.dart';
 import 'package:kro_banking/widgets/inputs/app_text_imput.dart';
@@ -16,7 +17,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 part 'constants/strings.dart';
 
-//TODO:overflow on input
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
@@ -57,9 +57,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Stack(
-        children: [_buildBackground(), _buildLogin()],
-      ),
+      child: _buildLogin(),
     );
   }
 
@@ -72,14 +70,14 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
               flex: device.isTablet ? 7 : 5,
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: context.pHeight(50)),
-                color: Colors.transparent,
+                color: context.theme.scaffoldBackgroundColor,
                 child: Column(
                   children: [
                     _buildGoToWebsite(),
                     const Spacer(),
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.kBgWhite,
                           borderRadius: BorderRadius.circular(10)),
                       margin:
                           EdgeInsets.symmetric(horizontal: context.pWidth(130)),
