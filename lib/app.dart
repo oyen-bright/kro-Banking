@@ -50,7 +50,7 @@ class AppBlocListeners extends StatelessWidget {
       listeners: [
         BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
-            state.when(authenticated: () {
+            state.when(authenticated: (_) {
               AppRouter.router.go(AppRoutes.home);
             }, unauthenticated: (message) {
               AppRouter.router.go(AppRoutes.login);

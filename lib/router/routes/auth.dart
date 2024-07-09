@@ -7,7 +7,7 @@ final authRoutes = [
       final isAuthenticated =
           context.read<AuthenticationBloc>().state.maybeWhen(
                 orElse: () => false,
-                authenticated: () => true,
+                authenticated: (_) => true,
               );
       if (isAuthenticated) {
         return AppRoutes.home;

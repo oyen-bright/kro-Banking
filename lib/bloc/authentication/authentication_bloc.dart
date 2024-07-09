@@ -7,6 +7,8 @@ import 'package:kro_banking/bloc/error/error_bloc.dart';
 import 'package:kro_banking/bloc/loading/loading_bloc.dart';
 import 'package:kro_banking/repository/authentication.dart';
 
+import '../../model/user.dart';
+
 part 'authentication_bloc.freezed.dart';
 part 'authentication_bloc.g.dart';
 part 'authentication_event.dart';
@@ -36,7 +38,8 @@ class AuthenticationBloc
     final user = _firebaseAuth.currentUser;
 
     if (user != null) {
-      emit(const AuthenticationState.authenticated());
+      emit(AuthenticationState.authenticated(
+          KroUser.userFromFirebaseUser(user)));
     } else {
       emit(const AuthenticationState.unauthenticated());
     }
@@ -55,7 +58,8 @@ class AuthenticationBloc
   void _onAuthStateChanged(
       _AuthChange event, Emitter<AuthenticationState> emit) {
     if (event.user != null) {
-      emit(const AuthenticationState.authenticated());
+      emit(AuthenticationState.authenticated(
+          KroUser.userFromFirebaseUser(event.user!)));
     } else {
       emit(const AuthenticationState.unauthenticated());
     }
