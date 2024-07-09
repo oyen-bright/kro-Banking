@@ -96,6 +96,7 @@ class _TransactionTabsState extends State<TransactionTabs> {
     return DefaultTabController(
       length: 3,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             decoration: BoxDecoration(
