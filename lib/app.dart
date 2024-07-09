@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kro_banking/bloc/authentication/authentication_bloc.dart';
 import 'package:kro_banking/bloc/bloc_provider.dart';
 import 'package:kro_banking/bloc/error/error_bloc.dart';
+import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/repository/repository_provider.dart';
 import 'package:kro_banking/router/route.dart';
 import 'package:kro_banking/router/router.dart';
@@ -67,22 +68,31 @@ class AppBlocListeners extends StatelessWidget {
                 switch (type) {
                   case NotificationType.loading:
                     toastification.show(
-                      icon: const Icon(FontAwesomeIcons.circleInfo),
+                      icon: Icon(FontAwesomeIcons.circleInfo,
+                          color: context.colorScheme.primary),
                       title: Text(message),
                       autoCloseDuration: const Duration(seconds: 10),
                     );
                     break;
                   case NotificationType.error:
                     toastification.show(
-                      icon: const Icon(FontAwesomeIcons.circleInfo),
-                      title: Text(message),
-                      backgroundColor: Colors.red,
+                      icon: Icon(
+                        FontAwesomeIcons.circleInfo,
+                        color: context.colorScheme.onError,
+                      ),
+                      title: Text(
+                        message,
+                        style: context.textTheme.titleMedium
+                            ?.copyWith(color: context.colorScheme.onError),
+                      ),
+                      backgroundColor: context.colorScheme.error,
                       autoCloseDuration: const Duration(seconds: 5),
                     );
                     break;
                   case NotificationType.notify:
                     toastification.show(
-                      icon: const Icon(FontAwesomeIcons.circleInfo),
+                      icon: Icon(FontAwesomeIcons.circleInfo,
+                          color: context.colorScheme.primary),
                       title: Text(message),
                       autoCloseDuration: const Duration(seconds: 5),
                     );
