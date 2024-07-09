@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kro_banking/bloc/authentication/authentication_bloc.dart';
 import 'package:kro_banking/bloc/error/error_bloc.dart';
@@ -27,15 +28,16 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     on<_LoadDashboard>(_onLoadDashBoard);
     on<_AccountDataChange>(_onAccountDataChange);
 
-    _accountRepository.listenToAccountChanges(userID, (newData) {
-      add(_AccountDataChange(newData));
-    });
+    // _accountRepository.listenToAccountChanges(userID, (newData) {
+    //   add(_AccountDataChange(newData));
+    // });
   }
 
   void _onLoadDashBoard(
       _LoadDashboard event, Emitter<DashboardState> emit) async {
     final currentState = state.data;
     _loadingBloc.add(const LoadingEvent.loading());
+    await Future.delayed(10.seconds);
     emit(_Loading(
         accounts: currentState.$1,
         bills: currentState.$2,

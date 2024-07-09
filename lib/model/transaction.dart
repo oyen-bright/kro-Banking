@@ -36,4 +36,14 @@ class Transaction {
       'balance': balance,
     };
   }
+
+  static Transaction get dummy {
+    return Transaction(
+        balance: 0000.0,
+        id: '1',
+        description: '*************',
+        amount: 000.0,
+        type: "********",
+        dateTime: DateTime.now());
+  }
 }

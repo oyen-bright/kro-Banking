@@ -28,4 +28,9 @@ class Bill {
       'dueDate': dueDate.toIso8601String(),
     };
   }
+
+  static Bill get dummy {
+    return Bill(
+        id: '1', name: '*************', amount: 150.0, dueDate: DateTime.now());
+  }
 }

@@ -24,4 +24,8 @@ class Account {
       'balance': balance,
     };
   }
+
+  static Account get dummy {
+    return Account(id: '1', type: '*********', balance: 0000.0);
+  }
 }
