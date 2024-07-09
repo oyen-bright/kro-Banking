@@ -17,19 +17,20 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ErrorEvent {
   String get message => throw _privateConstructorUsedError;
+  NotificationType get type => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message) showError,
+    required TResult Function(String message, NotificationType type) showError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? showError,
+    TResult? Function(String message, NotificationType type)? showError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? showError,
+    TResult Function(String message, NotificationType type)? showError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +62,7 @@ abstract class $ErrorEventCopyWith<$Res> {
           ErrorEvent value, $Res Function(ErrorEvent) then) =
       _$ErrorEventCopyWithImpl<$Res, ErrorEvent>;
   @useResult
-  $Res call({String message});
+  $Res call({String message, NotificationType type});
 }
 
 /// @nodoc
@@ -78,12 +79,17 @@ class _$ErrorEventCopyWithImpl<$Res, $Val extends ErrorEvent>
   @override
   $Res call({
     Object? message = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as NotificationType,
     ) as $Val);
   }
 }
@@ -96,7 +102,7 @@ abstract class _$$ShowErrorImplCopyWith<$Res>
       __$$ShowErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String message});
+  $Res call({String message, NotificationType type});
 }
 
 /// @nodoc
@@ -111,12 +117,17 @@ class __$$ShowErrorImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
+    Object? type = null,
   }) {
     return _then(_$ShowErrorImpl(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as NotificationType,
     ));
   }
 }
@@ -124,14 +135,17 @@ class __$$ShowErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ShowErrorImpl implements _ShowError {
-  const _$ShowErrorImpl(this.message);
+  const _$ShowErrorImpl(this.message, {this.type = NotificationType.notify});
 
   @override
   final String message;
+  @override
+  @JsonKey()
+  final NotificationType type;
 
   @override
   String toString() {
-    return 'ErrorEvent.showError(message: $message)';
+    return 'ErrorEvent.showError(message: $message, type: $type)';
   }
 
   @override
@@ -139,11 +153,12 @@ class _$ShowErrorImpl implements _ShowError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ShowErrorImpl &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, message, type);
 
   @JsonKey(ignore: true)
   @override
@@ -154,27 +169,27 @@ class _$ShowErrorImpl implements _ShowError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message) showError,
+    required TResult Function(String message, NotificationType type) showError,
   }) {
-    return showError(message);
+    return showError(message, type);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? showError,
+    TResult? Function(String message, NotificationType type)? showError,
   }) {
-    return showError?.call(message);
+    return showError?.call(message, type);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? showError,
+    TResult Function(String message, NotificationType type)? showError,
     required TResult orElse(),
   }) {
     if (showError != null) {
-      return showError(message);
+      return showError(message, type);
     }
     return orElse();
   }
@@ -209,10 +224,13 @@ class _$ShowErrorImpl implements _ShowError {
 }
 
 abstract class _ShowError implements ErrorEvent {
-  const factory _ShowError(final String message) = _$ShowErrorImpl;
+  const factory _ShowError(final String message,
+      {final NotificationType type}) = _$ShowErrorImpl;
 
   @override
   String get message;
+  @override
+  NotificationType get type;
   @override
   @JsonKey(ignore: true)
   _$$ShowErrorImplCopyWith<_$ShowErrorImpl> get copyWith =>
@@ -224,19 +242,20 @@ mixin _$ErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String message) errorMessage,
+    required TResult Function(String message, NotificationType type)
+        errorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String message)? errorMessage,
+    TResult? Function(String message, NotificationType type)? errorMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String message)? errorMessage,
+    TResult Function(String message, NotificationType type)? errorMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -318,7 +337,8 @@ class _$ErrorInitialImpl implements _ErrorInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String message) errorMessage,
+    required TResult Function(String message, NotificationType type)
+        errorMessage,
   }) {
     return initial();
   }
@@ -327,7 +347,7 @@ class _$ErrorInitialImpl implements _ErrorInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String message)? errorMessage,
+    TResult? Function(String message, NotificationType type)? errorMessage,
   }) {
     return initial?.call();
   }
@@ -336,7 +356,7 @@ class _$ErrorInitialImpl implements _ErrorInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String message)? errorMessage,
+    TResult Function(String message, NotificationType type)? errorMessage,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -387,7 +407,7 @@ abstract class _$$ErrorMessageImplCopyWith<$Res> {
           _$ErrorMessageImpl value, $Res Function(_$ErrorMessageImpl) then) =
       __$$ErrorMessageImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message});
+  $Res call({String message, NotificationType type});
 }
 
 /// @nodoc
@@ -402,12 +422,17 @@ class __$$ErrorMessageImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
+    Object? type = null,
   }) {
     return _then(_$ErrorMessageImpl(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as NotificationType,
     ));
   }
 }
@@ -415,14 +440,16 @@ class __$$ErrorMessageImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorMessageImpl implements _ErrorMessage {
-  const _$ErrorMessageImpl(this.message);
+  const _$ErrorMessageImpl(this.message, this.type);
 
   @override
   final String message;
+  @override
+  final NotificationType type;
 
   @override
   String toString() {
-    return 'ErrorState.errorMessage(message: $message)';
+    return 'ErrorState.errorMessage(message: $message, type: $type)';
   }
 
   @override
@@ -430,11 +457,12 @@ class _$ErrorMessageImpl implements _ErrorMessage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorMessageImpl &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, message, type);
 
   @JsonKey(ignore: true)
   @override
@@ -446,29 +474,30 @@ class _$ErrorMessageImpl implements _ErrorMessage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String message) errorMessage,
+    required TResult Function(String message, NotificationType type)
+        errorMessage,
   }) {
-    return errorMessage(message);
+    return errorMessage(message, type);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String message)? errorMessage,
+    TResult? Function(String message, NotificationType type)? errorMessage,
   }) {
-    return errorMessage?.call(message);
+    return errorMessage?.call(message, type);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String message)? errorMessage,
+    TResult Function(String message, NotificationType type)? errorMessage,
     required TResult orElse(),
   }) {
     if (errorMessage != null) {
-      return errorMessage(message);
+      return errorMessage(message, type);
     }
     return orElse();
   }
@@ -506,9 +535,11 @@ class _$ErrorMessageImpl implements _ErrorMessage {
 }
 
 abstract class _ErrorMessage implements ErrorState {
-  const factory _ErrorMessage(final String message) = _$ErrorMessageImpl;
+  const factory _ErrorMessage(
+      final String message, final NotificationType type) = _$ErrorMessageImpl;
 
   String get message;
+  NotificationType get type;
   @JsonKey(ignore: true)
   _$$ErrorMessageImplCopyWith<_$ErrorMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;

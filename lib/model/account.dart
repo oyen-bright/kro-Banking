@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class Account {
   final String id;
   final String type;
@@ -27,5 +28,17 @@ class Account {
 
   static Account get dummy {
     return Account(id: '1', type: '*********', balance: 0000.0);
+  }
+
+  Account copyWith({
+    String? id,
+    String? type,
+    double? balance,
+  }) {
+    return Account(
+      id: id ?? this.id,
+      type: type ?? this.type,
+      balance: balance ?? this.balance,
+    );
   }
 }

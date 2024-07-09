@@ -29,14 +29,17 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     on<_LoadDashboard>(_onLoadDashBoard);
     on<_AccountDataChange>(_onAccountDataChange);
     on<_TransactionDataChange>(_onTransactionDataChange);
+    on<_TransferBetweenAccounts>(_onTransferBetweenAccount);
 
-    // _accountRepository.listenToAccountChanges(userID, (newData) {
-    //   add(_AccountDataChange(newData));
-    // });
+    _accountRepository.listenToAccountChanges(userID, (newData) {
+      print("new data");
+      add(_AccountDataChange(newData));
+    });
 
-    // _transactionRepository.listenToTransactionChanges(userID, (newData) {
-    //   add(_TransactionDataChange(newData));
-    // });
+    _transactionRepository.listenToTransactionChanges(userID, (newData) {
+      print("new data");
+      add(_TransactionDataChange(newData));
+    });
   }
 
   void _onLoadDashBoard(
@@ -79,18 +82,60 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   void _onAccountDataChange(
       _AccountDataChange event, Emitter<DashboardState> emit) async {
     final currentState = state.data;
-    emit(_Loaded(
-        accounts: event.accounts,
-        bills: currentState.$2 ?? [],
-        transactions: currentState.$3 ?? []));
+    if (state is _Loaded) {
+      emit((state as _Loaded).copyWith(
+          accounts: event.accounts,
+          bills: currentState.$2 ?? [],
+          transactions: currentState.$3 ?? []));
+      return;
+    }
+
+    if (state is _Loading) {
+      emit(_Loaded(
+          accounts: event.accounts,
+          bills: currentState.$2 ?? [],
+          transactions: currentState.$3 ?? []));
+      return;
+    }
   }
 
   void _onTransactionDataChange(
       _TransactionDataChange event, Emitter<DashboardState> emit) async {
     final currentState = state.data;
-    emit(_Loaded(
-        accounts: currentState.$1 ?? [],
-        bills: currentState.$2 ?? [],
-        transactions: event.transaction));
+
+    if (state is _Loaded) {
+      emit((state as _Loaded).copyWith(
+          accounts: currentState.$1 ?? [],
+          bills: currentState.$2 ?? [],
+          transactions: event.transaction));
+      return;
+    }
+
+    if (state is _Loading) {
+      emit(_Loaded(
+          accounts: currentState.$1 ?? [],
+          bills: currentState.$2 ?? [],
+          transactions: event.transaction));
+      return;
+    }
+  }
+
+  void _onTransferBetweenAccount(
+      _TransferBetweenAccounts event, Emitter<DashboardState> emit) async {
+    _loadingBloc.add(const LoadingEvent.loading());
+    _errorBloc.add(const ErrorEvent.showError("Transferring Funds",
+        type: NotificationType.loading));
+    final response = await _accountRepository.makeTransfer(
+        userID, event.from, event.to, event.amount.toString());
+    _loadingBloc.add(const LoadingEvent.loaded());
+
+    if (response.$1 != null) {
+      _errorBloc.add(
+          ErrorEvent.showError(response.$1!, type: NotificationType.error));
+      return;
+    }
+
+    _errorBloc
+        .add(ErrorEvent.showError(response.$2!, type: NotificationType.notify));
   }
 }

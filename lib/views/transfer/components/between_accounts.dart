@@ -24,27 +24,48 @@ class _BetweenAccountState extends State<BetweenAccount> {
   Account? selectedPayer;
 
   double transferAmount = 0.0;
+
+  late final TextEditingController controller;
+
+  @override
+  void initState() {
+    controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
-        accounts = state.data.$1 ?? [];
+        if (accounts.isEmpty) {
+          accounts = state.data.$1 ?? [];
+        } else if (state.data.$1 != null && state.data.$1!.isNotEmpty) {
+          accounts = state.data.$1!;
+        }
 
         return Row(
           children: [
-            _buildBetweenAccount(context),
+            _buildBetweenAccount(context, controller),
             const Padding(
               padding: KContents.kCardPad,
               child: VerticalDivider(),
             ),
-            _buildTransferSummary(context),
+            _buildTransferSummary(context, controller),
           ],
         );
       },
     );
   }
 
-  Expanded _buildTransferSummary(BuildContext context) {
+//TODO: relative builder
+  Expanded _buildTransferSummary(
+      BuildContext context, TextEditingController controller) {
     return Expanded(
       flex: 1,
       child: Column(
@@ -74,7 +95,7 @@ class _BetweenAccountState extends State<BetweenAccount> {
               AutoSizeText('Transfer Amount:${appCurrency(transferAmount)}',
                   maxLines: 1, style: context.textTheme.bodyLarge),
               Text(
-                'New Balance: ${appCurrency(selectedPayer?.balance ?? 0 - transferAmount)}',
+                'New Balance: ${appCurrency((selectedPayer?.balance ?? 0) - transferAmount)}',
                 maxLines: 2,
                 style: context.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w300,
@@ -103,7 +124,7 @@ class _BetweenAccountState extends State<BetweenAccount> {
               AutoSizeText('Transfer Amount:  ${appCurrency(transferAmount)} ',
                   maxLines: 1, style: context.textTheme.bodyLarge),
               Text(
-                  'New Balance: ${appCurrency(selectedRecipient?.balance ?? 0 + transferAmount)} ',
+                  'New Balance: ${appCurrency((selectedRecipient?.balance ?? 0) + transferAmount)} ',
                   maxLines: 2,
                   style: context.textTheme.headlineSmall!
                       .copyWith(fontWeight: FontWeight.w300)),
@@ -117,8 +138,8 @@ class _BetweenAccountState extends State<BetweenAccount> {
                     selectedPayer != null &&
                     transferAmount > 0 &&
                     transferAmount <= (selectedPayer?.balance ?? 0.0)
-                ? () {
-                    showDialog(
+                ? () async {
+                    final response = await showDialog<bool?>(
                       barrierDismissible: false,
                       useRootNavigator: true,
                       context: context,
@@ -130,6 +151,14 @@ class _BetweenAccountState extends State<BetweenAccount> {
                         );
                       },
                     );
+                    if (response != null && response) {
+                      setState(() {
+                        selectedPayer = null;
+                        selectedRecipient = null;
+                        transferAmount = 0;
+                        controller.clear();
+                      });
+                    }
                   }
                 : null,
             title: ('Transfer'),
@@ -155,7 +184,8 @@ class _BetweenAccountState extends State<BetweenAccount> {
     );
   }
 
-  Expanded _buildBetweenAccount(BuildContext context) {
+  Expanded _buildBetweenAccount(
+      BuildContext context, TextEditingController controller) {
     return Expanded(
       flex: 2,
       child: Column(
@@ -231,6 +261,7 @@ class _BetweenAccountState extends State<BetweenAccount> {
           ),
           const SizedBox(height: 5),
           TextField(
+            controller: controller,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
             ),

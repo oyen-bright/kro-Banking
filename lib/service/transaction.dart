@@ -11,7 +11,7 @@ class TransactionService {
       var transactionRef = _firestore
           .collection('User')
           .doc(userId)
-          .collection('transactions')
+          .collection('Transactions')
           .doc();
 
       String transactionId = transactionRef.id;

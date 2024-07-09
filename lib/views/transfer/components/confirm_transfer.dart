@@ -2,13 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kro_banking/bloc/bloc/dashboard_bloc.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/model/account.dart';
 import 'package:kro_banking/theme/app_colors.dart';
 import 'package:kro_banking/utils/currency_formater.dart';
 import 'package:kro_banking/widgets/buttons/app_elevated_button.dart';
+import 'package:kro_banking/widgets/overlay/loading_overlay.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class ConfirmTransfer extends StatefulWidget {
@@ -36,54 +39,58 @@ class _ConfirmTransferState extends State<ConfirmTransfer> {
       backgroundColor: AppColors.kBgWhite,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(KContents.kRadius.medium)),
-      child: SizedBox(
-        width: context.pWidth(500),
-        height: context.pWidth(500),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              color: Theme.of(context).primaryColor,
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    color: Colors.white,
-                    onPressed: () {
-                      if (_pageController.page == 0) {
-                        context.pop();
-                        return;
-                      }
-                      _pageController.animateToPage(
-                        0,
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.easeInOut,
-                      );
-                    },
-                    icon: const Icon(Icons.arrow_back),
-                  ),
-                  Text(
-                    "Transfer Between Accounts",
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                ],
+      child: LoadingOverlay(
+        child: SizedBox(
+          width: context.pWidth(500),
+          height: context.pWidth(500),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                color: Theme.of(context).primaryColor,
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      color: Colors.white,
+                      onPressed: () {
+                        if (_pageController.page == 0) {
+                          context.pop();
+                          return;
+                        }
+                        _pageController.animateToPage(
+                          0,
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                      icon: const Icon(Icons.arrow_back),
+                    ),
+                    Text(
+                      "Transfer Between Accounts",
+                      style:
+                          Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  _buildTransferSummaryPage(),
-                  _buildPinPage(_pageController),
-                ],
+              Expanded(
+                child: PageView(
+                  controller: _pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    _buildTransferSummaryPage(),
+                    _buildPinPage(_pageController, widget.selectedPayer,
+                        widget.selectedRecipient, widget.transferAmount),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -147,7 +154,8 @@ class _ConfirmTransferState extends State<ConfirmTransfer> {
     );
   }
 
-  Widget _buildPinPage(PageController pageController) {
+  Widget _buildPinPage(PageController pageController, Account? selectedPayer,
+      Account? selectedRecipient, double amount) {
     return Padding(
       padding: KContents.kCardPad,
       child: Column(
@@ -160,6 +168,9 @@ class _ConfirmTransferState extends State<ConfirmTransfer> {
           const SizedBox(height: 20),
           Expanded(
             child: TransactionPinInput(
+              selectedPayer: selectedPayer,
+              selectedRecipient: selectedRecipient,
+              transferAmount: amount,
               pageController: pageController,
             ),
           ),
@@ -170,7 +181,15 @@ class _ConfirmTransferState extends State<ConfirmTransfer> {
 }
 
 class TransactionPinInput extends StatefulWidget {
-  const TransactionPinInput({super.key, required this.pageController});
+  final Account? selectedPayer;
+  final Account? selectedRecipient;
+  final double transferAmount;
+  const TransactionPinInput(
+      {super.key,
+      required this.pageController,
+      this.selectedPayer,
+      this.selectedRecipient,
+      required this.transferAmount});
 
   final PageController pageController;
 
@@ -246,12 +265,21 @@ class _TransactionPinInputState extends State<TransactionPinInput> {
               const Spacer(),
               Expanded(
                 child: AppElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     formKey.currentState!.validate();
-                    // conditions for validating
-                    if (currentText.length != 6) {
-                      errorController.add(ErrorAnimationType
-                          .shake); // Triggering error shake animation
+                    if (textEditingController.text.length != 6) {
+                      errorController.add(ErrorAnimationType.shake);
+                      return;
+                    }
+
+                    context.read<DashboardBloc>().add(
+                        DashboardEvent.transferBetweenAccounts(
+                            widget.selectedPayer!,
+                            widget.selectedRecipient!,
+                            widget.transferAmount));
+
+                    if (mounted && context.mounted) {
+                      context.pop(true);
                     }
                   },
                   title: ('Confirm Transfer'),
