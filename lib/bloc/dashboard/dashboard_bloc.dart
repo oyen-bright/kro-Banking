@@ -7,6 +7,7 @@ import 'package:kro_banking/model/account.dart';
 import 'package:kro_banking/model/bills.dart';
 import 'package:kro_banking/model/transaction.dart';
 import 'package:kro_banking/repository/account.dart';
+import 'package:kro_banking/repository/bills.dart';
 import 'package:kro_banking/repository/transaction.dart';
 
 part 'dashboard_bloc.freezed.dart';
@@ -19,11 +20,17 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final AuthenticationBloc _authenticationBloc;
   final AccountRepository _accountRepository;
   final TransactionRepository _transactionRepository;
+  final BillRepository _billRepository;
 
   late final String userID;
 
-  DashboardBloc(this._loadingBloc, this._errorBloc, this._accountRepository,
-      this._authenticationBloc, this._transactionRepository)
+  DashboardBloc(
+      this._loadingBloc,
+      this._errorBloc,
+      this._accountRepository,
+      this._authenticationBloc,
+      this._transactionRepository,
+      this._billRepository)
       : super(const _Initial()) {
     userID = _authenticationBloc.state.user?.id ?? "";
     on<_LoadDashboard>(_onLoadDashBoard);
@@ -54,18 +61,22 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
     final response = await Future.wait([
       _accountRepository.getAccounts(userID),
-      _transactionRepository.getTransactions(userID)
+      _transactionRepository.getTransactions(userID),
+      _billRepository.getBills(userID)
     ]);
 
     final responseAccount = response[0] as (String?, List<Account>?);
     final responseTransaction = response[1] as (String?, List<Transaction>?);
+    final responseBills = response[2] as (String?, List<Bill>?);
 
-    if (responseAccount.$1 != null || responseTransaction.$1 != null) {
+    if (responseAccount.$1 != null ||
+        responseTransaction.$1 != null ||
+        responseBills.$1 != null) {
       _errorBloc.add(ErrorEvent.showError(
           responseAccount.$1 ?? responseTransaction.$1 ?? ""));
       emit(_Loaded(
           accounts: responseAccount.$2 ?? currentState.$1 ?? [],
-          bills: currentState.$2 ?? [],
+          bills: responseBills.$2 ?? currentState.$2 ?? [],
           transactions: responseTransaction.$2 ?? currentState.$3 ?? []));
 
       return;
@@ -73,7 +84,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
     emit(_Loaded(
       accounts: responseAccount.$2 ?? [],
-      bills: currentState.$2 ?? [],
+      bills: responseBills.$2 ?? [],
       transactions: responseTransaction.$2 ?? [],
     ));
     _loadingBloc.add(const LoadingEvent.loaded());

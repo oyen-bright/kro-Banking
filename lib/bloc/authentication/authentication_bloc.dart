@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:kro_banking/bloc/notification/error_bloc.dart';
 import 'package:kro_banking/bloc/loading/loading_bloc.dart';
+import 'package:kro_banking/bloc/notification/error_bloc.dart';
 import 'package:kro_banking/repository/authentication.dart';
 
 import '../../model/user.dart';
@@ -26,7 +26,7 @@ class AuthenticationBloc
       : super(const AuthenticationState.unknown()) {
     on<_Started>(_onStarted);
     on<_LoggedOut>(_onLoggedOut);
-    on<_SessionExpiredEvent>(_onSessionExpired);
+    // on<_SessionExpiredEvent>(_onSessionExpired);
     on<_AuthChange>(_onAuthStateChanged);
     _firebaseAuth = _authRepository.auth;
     _authSubscription = _firebaseAuth.authStateChanges().listen((User? user) {
@@ -50,10 +50,10 @@ class AuthenticationBloc
     emit(const AuthenticationState.unauthenticated());
   }
 
-  void _onSessionExpired(
-      _SessionExpiredEvent event, Emitter<AuthenticationState> emit) {
-    emit(AuthenticationState.unauthenticated(message: event.message));
-  }
+  // void _onSessionExpired(
+  //     _SessionExpiredEvent event, Emitter<AuthenticationState> emit) {
+  //   emit(AuthenticationState.unauthenticated(message: event.message));
+  // }
 
   void _onAuthStateChanged(
       _AuthChange event, Emitter<AuthenticationState> emit) {

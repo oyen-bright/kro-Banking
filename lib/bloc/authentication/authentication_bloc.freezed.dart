@@ -21,7 +21,6 @@ mixin _$AuthenticationEvent {
     required TResult Function() started,
     required TResult Function() loggedOut,
     required TResult Function(User? user) onAuthChanged,
-    required TResult Function(String message) sessionExpired,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +28,6 @@ mixin _$AuthenticationEvent {
     TResult? Function()? started,
     TResult? Function()? loggedOut,
     TResult? Function(User? user)? onAuthChanged,
-    TResult? Function(String message)? sessionExpired,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +35,6 @@ mixin _$AuthenticationEvent {
     TResult Function()? started,
     TResult Function()? loggedOut,
     TResult Function(User? user)? onAuthChanged,
-    TResult Function(String message)? sessionExpired,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,7 +43,6 @@ mixin _$AuthenticationEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_AuthChange value) onAuthChanged,
-    required TResult Function(_SessionExpiredEvent value) sessionExpired,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +50,6 @@ mixin _$AuthenticationEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_AuthChange value)? onAuthChanged,
-    TResult? Function(_SessionExpiredEvent value)? sessionExpired,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,7 +57,6 @@ mixin _$AuthenticationEvent {
     TResult Function(_Started value)? started,
     TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_AuthChange value)? onAuthChanged,
-    TResult Function(_SessionExpiredEvent value)? sessionExpired,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +121,6 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function() loggedOut,
     required TResult Function(User? user) onAuthChanged,
-    required TResult Function(String message) sessionExpired,
   }) {
     return started();
   }
@@ -138,7 +131,6 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function()? loggedOut,
     TResult? Function(User? user)? onAuthChanged,
-    TResult? Function(String message)? sessionExpired,
   }) {
     return started?.call();
   }
@@ -149,7 +141,6 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function()? loggedOut,
     TResult Function(User? user)? onAuthChanged,
-    TResult Function(String message)? sessionExpired,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -164,7 +155,6 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_AuthChange value) onAuthChanged,
-    required TResult Function(_SessionExpiredEvent value) sessionExpired,
   }) {
     return started(this);
   }
@@ -175,7 +165,6 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_AuthChange value)? onAuthChanged,
-    TResult? Function(_SessionExpiredEvent value)? sessionExpired,
   }) {
     return started?.call(this);
   }
@@ -186,7 +175,6 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_AuthChange value)? onAuthChanged,
-    TResult Function(_SessionExpiredEvent value)? sessionExpired,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -241,7 +229,6 @@ class _$LoggedOutImpl implements _LoggedOut {
     required TResult Function() started,
     required TResult Function() loggedOut,
     required TResult Function(User? user) onAuthChanged,
-    required TResult Function(String message) sessionExpired,
   }) {
     return loggedOut();
   }
@@ -252,7 +239,6 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult? Function()? started,
     TResult? Function()? loggedOut,
     TResult? Function(User? user)? onAuthChanged,
-    TResult? Function(String message)? sessionExpired,
   }) {
     return loggedOut?.call();
   }
@@ -263,7 +249,6 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult Function()? started,
     TResult Function()? loggedOut,
     TResult Function(User? user)? onAuthChanged,
-    TResult Function(String message)? sessionExpired,
     required TResult orElse(),
   }) {
     if (loggedOut != null) {
@@ -278,7 +263,6 @@ class _$LoggedOutImpl implements _LoggedOut {
     required TResult Function(_Started value) started,
     required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_AuthChange value) onAuthChanged,
-    required TResult Function(_SessionExpiredEvent value) sessionExpired,
   }) {
     return loggedOut(this);
   }
@@ -289,7 +273,6 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult? Function(_Started value)? started,
     TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_AuthChange value)? onAuthChanged,
-    TResult? Function(_SessionExpiredEvent value)? sessionExpired,
   }) {
     return loggedOut?.call(this);
   }
@@ -300,7 +283,6 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult Function(_Started value)? started,
     TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_AuthChange value)? onAuthChanged,
-    TResult Function(_SessionExpiredEvent value)? sessionExpired,
     required TResult orElse(),
   }) {
     if (loggedOut != null) {
@@ -381,7 +363,6 @@ class _$AuthChangeImpl implements _AuthChange {
     required TResult Function() started,
     required TResult Function() loggedOut,
     required TResult Function(User? user) onAuthChanged,
-    required TResult Function(String message) sessionExpired,
   }) {
     return onAuthChanged(user);
   }
@@ -392,7 +373,6 @@ class _$AuthChangeImpl implements _AuthChange {
     TResult? Function()? started,
     TResult? Function()? loggedOut,
     TResult? Function(User? user)? onAuthChanged,
-    TResult? Function(String message)? sessionExpired,
   }) {
     return onAuthChanged?.call(user);
   }
@@ -403,7 +383,6 @@ class _$AuthChangeImpl implements _AuthChange {
     TResult Function()? started,
     TResult Function()? loggedOut,
     TResult Function(User? user)? onAuthChanged,
-    TResult Function(String message)? sessionExpired,
     required TResult orElse(),
   }) {
     if (onAuthChanged != null) {
@@ -418,7 +397,6 @@ class _$AuthChangeImpl implements _AuthChange {
     required TResult Function(_Started value) started,
     required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_AuthChange value) onAuthChanged,
-    required TResult Function(_SessionExpiredEvent value) sessionExpired,
   }) {
     return onAuthChanged(this);
   }
@@ -429,7 +407,6 @@ class _$AuthChangeImpl implements _AuthChange {
     TResult? Function(_Started value)? started,
     TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_AuthChange value)? onAuthChanged,
-    TResult? Function(_SessionExpiredEvent value)? sessionExpired,
   }) {
     return onAuthChanged?.call(this);
   }
@@ -440,7 +417,6 @@ class _$AuthChangeImpl implements _AuthChange {
     TResult Function(_Started value)? started,
     TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_AuthChange value)? onAuthChanged,
-    TResult Function(_SessionExpiredEvent value)? sessionExpired,
     required TResult orElse(),
   }) {
     if (onAuthChanged != null) {
@@ -456,153 +432,6 @@ abstract class _AuthChange implements AuthenticationEvent {
   User? get user;
   @JsonKey(ignore: true)
   _$$AuthChangeImplCopyWith<_$AuthChangeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$SessionExpiredEventImplCopyWith<$Res> {
-  factory _$$SessionExpiredEventImplCopyWith(_$SessionExpiredEventImpl value,
-          $Res Function(_$SessionExpiredEventImpl) then) =
-      __$$SessionExpiredEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$SessionExpiredEventImplCopyWithImpl<$Res>
-    extends _$AuthenticationEventCopyWithImpl<$Res, _$SessionExpiredEventImpl>
-    implements _$$SessionExpiredEventImplCopyWith<$Res> {
-  __$$SessionExpiredEventImplCopyWithImpl(_$SessionExpiredEventImpl _value,
-      $Res Function(_$SessionExpiredEventImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$SessionExpiredEventImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$SessionExpiredEventImpl implements _SessionExpiredEvent {
-  const _$SessionExpiredEventImpl({required this.message});
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'AuthenticationEvent.sessionExpired(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SessionExpiredEventImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SessionExpiredEventImplCopyWith<_$SessionExpiredEventImpl> get copyWith =>
-      __$$SessionExpiredEventImplCopyWithImpl<_$SessionExpiredEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() loggedOut,
-    required TResult Function(User? user) onAuthChanged,
-    required TResult Function(String message) sessionExpired,
-  }) {
-    return sessionExpired(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? loggedOut,
-    TResult? Function(User? user)? onAuthChanged,
-    TResult? Function(String message)? sessionExpired,
-  }) {
-    return sessionExpired?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? loggedOut,
-    TResult Function(User? user)? onAuthChanged,
-    TResult Function(String message)? sessionExpired,
-    required TResult orElse(),
-  }) {
-    if (sessionExpired != null) {
-      return sessionExpired(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_LoggedOut value) loggedOut,
-    required TResult Function(_AuthChange value) onAuthChanged,
-    required TResult Function(_SessionExpiredEvent value) sessionExpired,
-  }) {
-    return sessionExpired(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_LoggedOut value)? loggedOut,
-    TResult? Function(_AuthChange value)? onAuthChanged,
-    TResult? Function(_SessionExpiredEvent value)? sessionExpired,
-  }) {
-    return sessionExpired?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_LoggedOut value)? loggedOut,
-    TResult Function(_AuthChange value)? onAuthChanged,
-    TResult Function(_SessionExpiredEvent value)? sessionExpired,
-    required TResult orElse(),
-  }) {
-    if (sessionExpired != null) {
-      return sessionExpired(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SessionExpiredEvent implements AuthenticationEvent {
-  const factory _SessionExpiredEvent({required final String message}) =
-      _$SessionExpiredEventImpl;
-
-  String get message;
-  @JsonKey(ignore: true)
-  _$$SessionExpiredEventImplCopyWith<_$SessionExpiredEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
