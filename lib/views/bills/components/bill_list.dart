@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
-import 'package:kro_banking/model/transaction.dart';
+import 'package:kro_banking/model/bills.dart';
 import 'package:kro_banking/theme/app_colors.dart';
 import 'package:kro_banking/utils/currency_formater.dart';
 import 'package:kro_banking/utils/date_formater.dart';
 
-class TransactionTabs extends StatefulWidget {
-  final List<Transaction> transactions;
+class BillTabs extends StatefulWidget {
+  final List<Bill> bills;
 
-  const TransactionTabs({super.key, required this.transactions});
+  const BillTabs({super.key, required this.bills});
 
   @override
-  _TransactionTabsState createState() => _TransactionTabsState();
+  _BillTabsState createState() => _BillTabsState();
 }
 
-class _TransactionTabsState extends State<TransactionTabs> {
-  late List<Transaction> _filteredTransactions;
+class _BillTabsState extends State<BillTabs> {
+  late List<Bill> _filteredbills;
   final TextEditingController _filterController = TextEditingController();
   final int _rowsPerPage = 20;
   int _currentPage = 0;
   String _selectedFilter = 'All';
-  final List<String> _filterOptions = ['All', 'In', 'Out'];
-  final String _selectedStatus = 'All';
-  String _selectedType = 'All';
+  final List<String> _filterOptions = ['All', 'Reoccurring', 'Non-recurring'];
+  String _selectedStatus = 'All';
   String _selectedSortOrder = 'Descending';
   final List<String> _sortOrderOptions = ['Ascending', 'Descending'];
   DateTimeRange? _selectedDateRange;
@@ -31,36 +30,32 @@ class _TransactionTabsState extends State<TransactionTabs> {
   @override
   void initState() {
     super.initState();
-    _filteredTransactions = widget.transactions;
-    _filterTransactions();
+    _filteredbills = widget.bills;
+    _filterbills();
   }
 
-  void _filterTransactions() {
+  void _filterbills() {
     setState(() {
-      _filteredTransactions = widget.transactions.where((transaction) {
+      _filteredbills = widget.bills.where((transaction) {
         bool matchesFilter = _selectedFilter == 'All' ||
-            (_selectedFilter == 'In' && transaction.amount > 0) ||
-            (_selectedFilter == 'Out' && transaction.amount < 0);
-        bool matchesStatus = _selectedStatus == 'All' || false;
+            (_selectedFilter == 'Reoccurring' && transaction.reoccurring) ||
+            (_selectedFilter == 'Non-recurring' && !transaction.reoccurring);
         bool matchesType =
-            _selectedType == 'All' || transaction.type == _selectedType;
+            _selectedStatus == 'All' || transaction.status == _selectedStatus;
         bool matchesDateRange = _selectedDateRange == null ||
-            (transaction.dateTime.isAfter(_selectedDateRange!.start) &&
-                transaction.dateTime.isBefore(_selectedDateRange!.end));
-        return matchesFilter &&
-            matchesStatus &&
-            matchesType &&
-            matchesDateRange;
+            (transaction.dueDate.isAfter(_selectedDateRange!.start) &&
+                transaction.dueDate.isBefore(_selectedDateRange!.end));
+        return matchesFilter && matchesType && matchesDateRange;
       }).toList();
-      _sortTransactions();
+      _sortbills();
     });
   }
 
-  void _sortTransactions() {
-    _filteredTransactions.sort((a, b) {
+  void _sortbills() {
+    _filteredbills.sort((a, b) {
       int comparison = _selectedSortOrder == 'Ascending'
-          ? a.dateTime.compareTo(b.dateTime)
-          : b.dateTime.compareTo(a.dateTime);
+          ? a.dueDate.compareTo(b.dueDate)
+          : b.dueDate.compareTo(a.dueDate);
       return comparison;
     });
   }
@@ -81,7 +76,7 @@ class _TransactionTabsState extends State<TransactionTabs> {
     if (picked != null && picked != _selectedDateRange) {
       setState(() {
         _selectedDateRange = picked;
-        _filterTransactions();
+        _filterbills();
       });
     }
   }
@@ -90,10 +85,8 @@ class _TransactionTabsState extends State<TransactionTabs> {
   Widget build(BuildContext context) {
     int start = _currentPage * _rowsPerPage;
     int end = start + _rowsPerPage;
-    end =
-        end > _filteredTransactions.length ? _filteredTransactions.length : end;
-    List<Transaction> transactionsToShow =
-        _filteredTransactions.sublist(start, end);
+    end = end > _filteredbills.length ? _filteredbills.length : end;
+    List<Bill> billsToShow = _filteredbills.sublist(start, end);
 
     return DefaultTabController(
       length: 3,
@@ -108,14 +101,14 @@ class _TransactionTabsState extends State<TransactionTabs> {
                 borderRadius: BorderRadius.circular(KContents.kRadius.medium)),
             child: TabBar(
               tabs: const [
-                Tab(text: 'All Transactions'),
-                Tab(text: 'In Transactions'),
-                Tab(text: 'Out Transactions'),
+                Tab(text: 'All Bill'),
+                Tab(text: 'Reoccurring '),
+                Tab(text: 'Non-Reoccurring'),
               ],
               onTap: (index) {
                 setState(() {
                   _selectedFilter = _filterOptions[index];
-                  _filterTransactions();
+                  _filterbills();
                 });
               },
             ),
@@ -145,12 +138,12 @@ class _TransactionTabsState extends State<TransactionTabs> {
                         icon: const Icon(Icons.clear),
                         onPressed: () {
                           _filterController.clear();
-                          _filterTransactions();
+                          _filterbills();
                         },
                       ),
                     ),
                     onChanged: (value) {
-                      _filterTransactions();
+                      _filterbills();
                     },
                   ),
                 ),
@@ -163,17 +156,16 @@ class _TransactionTabsState extends State<TransactionTabs> {
           ),
           Row(
             children: [
-              _buildDropdown('Type', ['All', 'Opening', 'Debit', 'Deposit'],
-                  (value) {
+              _buildDropdown('Type', ['All', 'Pending', 'Completed'], (value) {
                 setState(() {
-                  _selectedType = value!;
-                  _filterTransactions();
+                  _selectedStatus = value!;
+                  _filterbills();
                 });
               }),
               _buildDropdown('Sort By Date', _sortOrderOptions, (value) {
                 setState(() {
                   _selectedSortOrder = value!;
-                  _sortTransactions();
+                  _sortbills();
                 });
               }),
             ],
@@ -182,9 +174,9 @@ class _TransactionTabsState extends State<TransactionTabs> {
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                _buildTransactionList(transactionsToShow),
-                _buildTransactionList(transactionsToShow),
-                _buildTransactionList(transactionsToShow),
+                _buildTransactionList(billsToShow),
+                _buildTransactionList(billsToShow),
+                _buildTransactionList(billsToShow),
               ],
             ),
           ),
@@ -200,13 +192,13 @@ class _TransactionTabsState extends State<TransactionTabs> {
                     _currentPage > 0 ? () => _goToPage(_currentPage - 1) : null,
               ),
               Text(
-                  '${_currentPage + 1} / ${(_filteredTransactions.length / _rowsPerPage).ceil()}'),
+                  '${_currentPage + 1} / ${(_filteredbills.length / _rowsPerPage).ceil()}'),
               IconButton(
                 icon: const Icon(Icons.arrow_forward),
-                onPressed: (_currentPage + 1) * _rowsPerPage <
-                        _filteredTransactions.length
-                    ? () => _goToPage(_currentPage + 1)
-                    : null,
+                onPressed:
+                    (_currentPage + 1) * _rowsPerPage < _filteredbills.length
+                        ? () => _goToPage(_currentPage + 1)
+                        : null,
               ),
             ],
           ),
@@ -218,43 +210,47 @@ class _TransactionTabsState extends State<TransactionTabs> {
     );
   }
 
-  Widget _buildTransactionList(List<Transaction> transactions) {
+  Widget _buildTransactionList(List<Bill> bills) {
     return ListView.separated(
       separatorBuilder: (context, index) => const Divider(),
-      itemCount: transactions.length,
+      itemCount: bills.length,
       itemBuilder: (context, index) {
-        final transaction = transactions[index];
-        bool isDebit = transaction.isDebit;
+        final transaction = bills[index];
 
         return ListTile(
-          leading: Container(
-            padding: const EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: !isDebit
-                  ? Colors.green.withOpacity(0.2)
-                  : Colors.red.withOpacity(0.2),
-            ),
-            child: Icon(isDebit ? Icons.arrow_outward : Icons.arrow_back),
-          ),
+          isThreeLine: true,
+          // leading: Container(
+          //   padding: const EdgeInsets.all(15),
+          //   decoration: BoxDecoration(
+          //     color: transaction.isPending
+          //         ? Colors.green.withOpacity(0.2)
+          //         : Colors.pr.withOpacity(0.2),
+          //   ),
+          //   child: Icon(isDebit ? Icons.arrow_outward : Icons.arrow_back),
+          // ),
           title: Text(
-            transaction.description,
+            transaction.name,
             style: context.textTheme.titleMedium,
           ),
           subtitle: Text(
-            formatDate(transaction.dateTime),
+            "Due Date: ${formatDate(transaction.dueDate)}",
             style: context.textTheme.titleMedium,
           ),
           trailing: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                'Amount:   ${appCurrency(transaction.amount)}',
+                '  ${appCurrency(transaction.amount)}',
                 style: context.textTheme.titleMedium,
               ),
-              Text(
-                'Balance:  ${appCurrency(transaction.balance)}',
-                style: context.textTheme.titleMedium,
-              ),
+              Container(
+                color: transaction.isPending
+                    ? Colors.amber[100]
+                    : Colors.green[100],
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+                child: Text(transaction.status),
+              )
             ],
           ),
         );
@@ -271,7 +267,7 @@ class _TransactionTabsState extends State<TransactionTabs> {
           Text(label),
           const SizedBox(width: 8),
           DropdownButton<String>(
-            value: label == 'Type' ? _selectedType : _selectedSortOrder,
+            value: label == 'Type' ? _selectedStatus : _selectedSortOrder,
             items: items.map((String value) {
               return DropdownMenuItem<String>(
                 value: value,

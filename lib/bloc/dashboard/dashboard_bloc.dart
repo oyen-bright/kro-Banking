@@ -84,7 +84,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
     emit(_Loaded(
       accounts: responseAccount.$2 ?? [],
-      bills: currentState.$2 ?? [],
+      bills: responseBills.$2 ?? [],
       transactions: responseTransaction.$2 ?? [],
     ));
     _loadingBloc.add(const LoadingEvent.loaded());

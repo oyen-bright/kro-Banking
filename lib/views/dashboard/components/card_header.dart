@@ -22,7 +22,8 @@ class CardHeader extends StatelessWidget {
               fontSize: context.textTheme.titleMedium!.fontSize! + 2),
         ),
         const Spacer(),
-        TextButton(onPressed: onPressed, child: Text(buttonTitle))
+        if (onPressed != null)
+          TextButton(onPressed: onPressed, child: Text(buttonTitle))
       ],
     );
   }

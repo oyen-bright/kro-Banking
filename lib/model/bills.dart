@@ -29,6 +29,17 @@ class Bill {
     );
   }
 
+  static Bill get dummy {
+    return Bill(
+        reoccurring: true,
+        status: 'pending',
+        id: "id",
+        name: '********',
+        amount: 00,
+        dueDate: DateTime.now(),
+        completed: false);
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'status': status,
@@ -39,5 +50,9 @@ class Bill {
       'reoccurring': reoccurring,
       'completed': completed,
     };
+  }
+
+  bool get isPending {
+    return status == "pending";
   }
 }

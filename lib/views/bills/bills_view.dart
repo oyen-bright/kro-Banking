@@ -8,13 +8,13 @@ import 'package:kro_banking/model/account.dart';
 import 'package:kro_banking/model/bills.dart';
 import 'package:kro_banking/model/transaction.dart';
 import 'package:kro_banking/theme/app_colors.dart';
+import 'package:kro_banking/views/bills/components/bill_card.dart';
 import 'package:kro_banking/views/dashboard/components/card_header.dart';
-import 'package:kro_banking/views/dashboard/components/recent_transaction_tile.dart';
 import 'package:kro_banking/views/wrapper/view_wrapper.dart';
 import 'package:kro_banking/widgets/app_shimer.dart';
 import 'package:kro_banking/widgets/overlay/loading_overlay.dart';
 
-import 'components/transaction_tabs.dart';
+import 'components/bill_list.dart';
 
 class BillsView extends StatelessWidget {
   const BillsView({super.key});
@@ -34,6 +34,7 @@ class BillsView extends StatelessWidget {
           );
 
           return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 width: 850 + 450,
@@ -58,6 +59,7 @@ class BillsView extends StatelessWidget {
               ),
               Wrap(
                 runAlignment: WrapAlignment.center,
+                alignment: WrapAlignment.center,
                 crossAxisAlignment: WrapCrossAlignment.start,
                 runSpacing: context.pHeight(KContents.kHorizontalPad),
                 spacing: context.pWidth(KContents.kHorizontalPad),
@@ -76,9 +78,9 @@ class BillsView extends StatelessWidget {
                         ),
                       ),
                       child: LoadingOverlay(
-                        child: state.data.$3 != null
-                            ? TransactionTabs(
-                                transactions: state.data.$3 ?? [],
+                        child: state.data.$2 != null
+                            ? BillTabs(
+                                bills: state.data.$2 ?? [],
                               )
                             : const SizedBox.shrink(),
                       )),
@@ -96,31 +98,28 @@ class BillsView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          CardHeader(
-                            title: "Recent Transactions",
-                            buttonTitle: "View All",
-                            onPressed: () {
-                              // AppRouter.router.go(AppRoutes.transactionHistory);
-                            },
-                          ),
+                          const CardHeader(
+                              title: "Upcoming Payment",
+                              buttonTitle: "View All",
+                              onPressed: null),
                           const SizedBox(
                             height: 10,
                           ),
-                          if (isLoading || data.$3 == null)
+                          if (isLoading || data.$2 == null)
                             ...List.generate(
                               15,
                               (_) => AppShimmer(
-                                  child:
-                                      CardTile(transaction: Transaction.dummy)),
+                                  child: BillsTile(bill: Bill.dummy)),
                             )
                           else
                             ...AnimateList(
                                 interval: 200.ms,
                                 effects: [FadeEffect(duration: 100.ms)],
-                                children: data.$3!
+                                children: data.$2!
                                     .take(10)
-                                    .map((transaction) => CardTile(
-                                          transaction: transaction,
+                                    .where((bill) => bill.isPending)
+                                    .map((bill) => BillsTile(
+                                          bill: bill,
                                         ))
                                     .toList())
                         ],
