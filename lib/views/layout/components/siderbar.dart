@@ -18,8 +18,8 @@ final menuItems = [
     'icon': Icons.input,
     'route': AppRoutes.transactionHistory
   },
-  {'title': 'Account', 'icon': Icons.wallet, 'route': AppRoutes.accounts},
   {'title': 'Bills', 'icon': Icons.payment, 'route': AppRoutes.billPayments},
+  {'title': 'Account', 'icon': Icons.wallet, 'route': AppRoutes.accounts},
   {
     'title': 'Investment',
     'icon': Icons.analytics,
