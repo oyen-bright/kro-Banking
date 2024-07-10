@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:kro_banking/bloc/error/error_bloc.dart';
+import 'package:kro_banking/bloc/notification/error_bloc.dart';
 import 'package:kro_banking/bloc/loading/loading_bloc.dart';
 import 'package:kro_banking/repository/authentication.dart';
 

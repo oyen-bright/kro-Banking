@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kro_banking/bloc/bloc/dashboard_bloc.dart';
+import 'package:kro_banking/bloc/dashboard/dashboard_bloc.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/model/account.dart';

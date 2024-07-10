@@ -57,7 +57,7 @@ class AccountService {
       fromAccount =
           fromAccount.copyWith(balance: (fromAccount.balance - transferAmount));
       toAccount =
-          toAccount.copyWith(balance: (toAccount.balance - transferAmount));
+          toAccount.copyWith(balance: (toAccount.balance + transferAmount));
 
       log(fromAccount.toJson().toString());
       log(toAccount.toJson().toString());

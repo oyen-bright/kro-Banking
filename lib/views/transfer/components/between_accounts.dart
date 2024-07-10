@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kro_banking/bloc/bloc/dashboard_bloc.dart';
+import 'package:kro_banking/bloc/dashboard/dashboard_bloc.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/model/account.dart';
@@ -232,7 +232,7 @@ class _BetweenAccountState extends State<BetweenAccount> {
               return DropdownMenuItem<Account>(
                 value: account,
                 child: Text(
-                    '${account.type} (Balance: \$${account.balance.toStringAsFixed(2)})'),
+                    '${account.type} (Balance: ${appCurrency(account.balance)})'),
               );
             }).toList(),
             onChanged: (Account? newValue) {
@@ -260,7 +260,7 @@ class _BetweenAccountState extends State<BetweenAccount> {
               return DropdownMenuItem<Account>(
                 value: account,
                 child: Text(
-                    '${account.type} (Balance: \$${account.balance.toStringAsFixed(2)})'),
+                    '${account.type} (Balance: ${appCurrency(account.balance)})'),
               );
             }).toList(),
             onChanged: selectedRecipient == null

@@ -47,7 +47,7 @@ class _ConfirmTransferState extends State<ConfirmTransfer> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                color: context.theme.scaffoldBackgroundColor,
+                color: context.colorScheme.primary,
                 padding: const EdgeInsets.all(16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kro_banking/bloc/authentication/authentication_bloc.dart';
 import 'package:kro_banking/bloc/bloc_provider.dart';
-import 'package:kro_banking/bloc/error/error_bloc.dart';
+import 'package:kro_banking/bloc/notification/error_bloc.dart';
 import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/repository/repository_provider.dart';
 import 'package:kro_banking/router/route.dart';

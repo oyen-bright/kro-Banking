@@ -61,8 +61,8 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
     );
   }
 
-  Positioned _buildLogin() {
-    return Positioned.fill(child: ResponsiveBuilder(builder: (context, device) {
+  Widget _buildLogin() {
+    return ResponsiveBuilder(builder: (context, device) {
       return Row(
         children: [
           if (!device.isMobile) _buildContactSection(context),
@@ -179,7 +179,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
               ))
         ],
       );
-    }));
+    });
   }
 
   TextButton _buildGoToWebsite() {
