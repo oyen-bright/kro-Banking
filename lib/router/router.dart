@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kro_banking/bloc/authentication/authentication_bloc.dart';
+import 'package:kro_banking/extentions/on_context.dart';
 import 'package:kro_banking/router/route.dart';
 import 'package:kro_banking/views/dashboard/dashboard_view.dart';
 import 'package:kro_banking/views/layout/layout_view.dart';
@@ -67,19 +68,25 @@ class AppRouter {
       initialLocation: AppRoutes.login,
       routes: routes,
       errorBuilder: (context, state) {
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                '404 - Page Not Found',
-                style: TextStyle(fontSize: 24),
-              ),
-              ElevatedButton(
-                onPressed: () => context.go(AppRoutes.home),
-                child: const Text('Go Home'),
-              ),
-            ],
+        return Material(
+          color: context.theme.scaffoldBackgroundColor,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  '404 - Page Not Found',
+                  style: TextStyle(fontSize: 24),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextButton(
+                  onPressed: () => context.go(AppRoutes.home),
+                  child: const Text('Go Home'),
+                ),
+              ],
+            ),
           ),
         );
       },
