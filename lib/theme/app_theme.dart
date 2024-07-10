@@ -14,6 +14,9 @@ class AppTheme {
       colorScheme: baseTheme.colorScheme.copyWith(
         primary: AppColors.color136BFC,
       ),
+      primaryColor: AppColors.color136BFC,
+      inputDecorationTheme: baseTheme.inputDecorationTheme
+          .copyWith(fillColor: const Color(0xFFD2E3FC).withOpacity(0.5)),
       scaffoldBackgroundColor: AppColors.color249250250,
       textTheme: GoogleFonts.nunitoTextTheme(baseTheme.textTheme),
     );
