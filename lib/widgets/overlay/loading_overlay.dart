@@ -29,8 +29,8 @@ class LoadingOverlay extends StatelessWidget {
                       borderRadius: borderRadius,
                       child: BackdropFilter(
                         filter: ImageFilter.blur(
-                          sigmaX: 1.0,
-                          sigmaY: 1.0,
+                          sigmaX: 4.0,
+                          sigmaY: 4.0,
                         ),
                         child: Container(
                           color: Colors.transparent,
@@ -39,7 +39,7 @@ class LoadingOverlay extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SpinKitDancingSquare(
+                                  SpinKitFoldingCube(
                                     color: context.colorScheme.primary,
                                     size: 50.0,
                                   ),
