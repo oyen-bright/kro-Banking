@@ -85,7 +85,7 @@ class DashboardView extends StatelessWidget {
               title: "Recent Transactions",
               buttonTitle: "View All",
               onPressed: () {
-                AppRouter.router.go(AppRoutes.investments);
+                AppRouter.router.go(AppRoutes.transactionHistory);
               },
             ),
             const SizedBox(
