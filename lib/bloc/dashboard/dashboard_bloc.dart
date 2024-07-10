@@ -67,7 +67,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
     final responseAccount = response[0] as (String?, List<Account>?);
     final responseTransaction = response[1] as (String?, List<Transaction>?);
-    final responseBills = response[2] as (String?, List<Transaction>?);
+    final responseBills = response[2] as (String?, List<Bill>?);
 
     if (responseAccount.$1 != null ||
         responseTransaction.$1 != null ||
@@ -76,7 +76,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           responseAccount.$1 ?? responseTransaction.$1 ?? ""));
       emit(_Loaded(
           accounts: responseAccount.$2 ?? currentState.$1 ?? [],
-          bills: currentState.$2 ?? [],
+          bills: responseBills.$2 ?? currentState.$2 ?? [],
           transactions: responseTransaction.$2 ?? currentState.$3 ?? []));
 
       return;

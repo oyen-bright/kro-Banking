@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:kro_banking/model/bills.dart';
 import 'package:kro_banking/service/bills.dart';
 
 class BillRepository {
@@ -7,7 +8,7 @@ class BillRepository {
 
   BillRepository(this.billService);
 
-  Future<(String?, List<Map<String, dynamic>>?)> getBills(String userId) async {
+  Future<(String?, List<Bill>?)> getBills(String userId) async {
     try {
       final response = await billService.getAllBills(userId);
       return (null, response);

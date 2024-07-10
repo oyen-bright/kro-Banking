@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kro_banking/model/bills.dart';
 
 @Singleton()
 class BillService {
@@ -20,7 +21,7 @@ class BillService {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getAllBills(String userId) async {
+  Future<List<Bill>> getAllBills(String userId) async {
     try {
       var snapshot = await _firestore
           .collection('User')
@@ -28,7 +29,7 @@ class BillService {
           .collection('Bills')
           .get();
 
-      return snapshot.docs.map((doc) => doc.data()).toList();
+      return snapshot.docs.map((doc) => Bill.fromJson(doc.data())).toList();
     } catch (e) {
       rethrow;
     }
