@@ -15,7 +15,7 @@ class AppTheme {
         primary: AppColors.color136BFC,
       ),
       scaffoldBackgroundColor: AppColors.color249250250,
-      textTheme: GoogleFonts.openSansTextTheme(baseTheme.textTheme),
+      textTheme: GoogleFonts.nunitoTextTheme(baseTheme.textTheme),
     );
   }
 }

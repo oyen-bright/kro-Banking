@@ -52,6 +52,8 @@ class _AccountCardState extends State<AccountCard> {
       width: 425,
       decoration: BoxDecoration(
           color: AppColors.kBgWhite,
+          border:
+              Border.all(color: context.colorScheme.primary.withOpacity(0.2)),
           borderRadius: BorderRadius.circular(KContents.kRadius.medium)),
       padding: padding,
       height: cardHeight,
@@ -63,8 +65,7 @@ class _AccountCardState extends State<AccountCard> {
               Text(
                 widget.account.type,
                 style: context.textTheme.titleMedium?.copyWith(
-                    color: context.colorScheme.primary,
-                    fontWeight: FontWeight.w600),
+                    color: AppColors.color1E1E1E, fontWeight: FontWeight.w500),
               ),
               const Spacer(),
               IconButton(
@@ -88,7 +89,7 @@ class _AccountCardState extends State<AccountCard> {
             "${KContents.kAppCurrency} ${isVisible ? appCurrency(widget.account.balance, false) : "*" * appCurrency(widget.account.balance, false).length}",
             style: context.textTheme.headlineLarge?.copyWith(
                 color: Colors.black,
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w700,
                 fontSize: fontSize),
           ),
           const Spacer(),
