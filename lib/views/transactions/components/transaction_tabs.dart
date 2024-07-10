@@ -24,7 +24,7 @@ class _TransactionTabsState extends State<TransactionTabs> {
   final List<String> _filterOptions = ['All', 'In', 'Out'];
   final String _selectedStatus = 'All';
   String _selectedType = 'All';
-  String _selectedSortOrder = 'Ascending';
+  String _selectedSortOrder = 'Descending';
   final List<String> _sortOrderOptions = ['Ascending', 'Descending'];
   DateTimeRange? _selectedDateRange;
 
