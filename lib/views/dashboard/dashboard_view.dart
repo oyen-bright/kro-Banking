@@ -137,8 +137,7 @@ class DashboardView extends StatelessWidget {
             children: [
               Text(
                 "Return",
-                style: context.textTheme.headlineSmall
-                    ?.copyWith(color: context.colorScheme.primary),
+                style: context.textTheme.titleLarge?.copyWith(),
               ),
               const Icon(
                 FontAwesomeIcons.caretUp,

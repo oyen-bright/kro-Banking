@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kro_banking/extentions/on_context.dart';
 
 class AppElevatedButton extends StatelessWidget {
   final String title;
@@ -14,6 +15,8 @@ class AppElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+          backgroundColor: context.colorScheme.primary,
+          foregroundColor: context.colorScheme.onPrimary,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
           minimumSize: const Size.fromHeight(kToolbarHeight)),

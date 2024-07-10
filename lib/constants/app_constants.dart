@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class KContents {
   KContents._();
 
-  static const String kAppName = "kroBanking";
+  static const String kAppName = "kBanking";
   static const String kAppCurrency = '₦';
   static const String kProfileIcon =
       "https://avatars.githubusercontent.com/u/35768100?v=4";

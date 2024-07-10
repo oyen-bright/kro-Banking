@@ -39,6 +39,7 @@ class Layout extends StatelessWidget {
                   LayoutHeader(scaffoldKey: _scaffoldKey),
                   Expanded(
                       child: SingleChildScrollView(
+                    // physics: const BouncingScrollPhysics(),
                     controller: AppRouter.scrollController,
                     child: Padding(
                       padding: EdgeInsets.symmetric(

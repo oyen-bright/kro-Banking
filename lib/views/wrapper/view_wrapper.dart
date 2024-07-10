@@ -31,7 +31,10 @@ class ViewWrapper extends StatelessWidget {
           SizedBox(
             height: 1.sh,
           ),
-          child
+          child,
+          SizedBox(
+            height: 2.sh,
+          ),
         ]);
   }
 }
