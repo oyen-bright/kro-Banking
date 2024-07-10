@@ -14,7 +14,8 @@ class AppElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          shape: const RoundedRectangleBorder(),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5))),
           minimumSize: const Size.fromHeight(kToolbarHeight)),
       onPressed: onPressed,
       child: Text(title),

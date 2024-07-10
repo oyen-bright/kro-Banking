@@ -24,13 +24,15 @@ class _TransactionTabsState extends State<TransactionTabs> {
   final List<String> _filterOptions = ['All', 'In', 'Out'];
   final String _selectedStatus = 'All';
   String _selectedType = 'All';
-  final bool _sortAscending = true;
+  String _selectedSortOrder = 'Ascending';
+  final List<String> _sortOrderOptions = ['Ascending', 'Descending'];
   DateTimeRange? _selectedDateRange;
 
   @override
   void initState() {
     super.initState();
     _filteredTransactions = widget.transactions;
+    _filterTransactions();
   }
 
   void _filterTransactions() {
@@ -56,7 +58,7 @@ class _TransactionTabsState extends State<TransactionTabs> {
 
   void _sortTransactions() {
     _filteredTransactions.sort((a, b) {
-      int comparison = _sortAscending
+      int comparison = _selectedSortOrder == 'Ascending'
           ? a.dateTime.compareTo(b.dateTime)
           : b.dateTime.compareTo(a.dateTime);
       return comparison;
@@ -168,28 +170,12 @@ class _TransactionTabsState extends State<TransactionTabs> {
                   _filterTransactions();
                 });
               }),
-              // IconButton(
-              //   // tooltip: "Select Date Range",
-              //   onPressed: () => _selectDateRange(context),
-              //   icon: const Icon(Icons.date_range),
-              // ),
-              // IconButton(
-              //   // tooltip: "Sort By Date",
-              //   onPressed: () {
-              //     setState(() {
-              //       _sortAscending = !_sortAscending;
-              //       _sortTransactions();
-              //     });
-              //   },
-              //   icon: Row(
-              //     children: [
-              //       const Icon(Icons.calendar_month),
-              //       Icon(_sortAscending
-              //           ? Icons.arrow_upward
-              //           : Icons.arrow_downward),
-              //     ],
-              //   ),
-              // )
+              _buildDropdown('Sort By Date', _sortOrderOptions, (value) {
+                setState(() {
+                  _selectedSortOrder = value!;
+                  _sortTransactions();
+                });
+              }),
             ],
           ),
           Expanded(
@@ -285,7 +271,7 @@ class _TransactionTabsState extends State<TransactionTabs> {
           Text(label),
           const SizedBox(width: 8),
           DropdownButton<String>(
-            value: label == 'Type' ? _selectedType : _selectedStatus,
+            value: label == 'Type' ? _selectedType : _selectedSortOrder,
             items: items.map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
