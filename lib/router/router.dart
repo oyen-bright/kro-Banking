@@ -50,6 +50,7 @@ class AppRouter {
 
   BuildContext get context =>
       router.routerDelegate.navigatorKey.currentContext!;
+  static final ScrollController scrollController = ScrollController();
 
   GoRouterDelegate get routerDelegate => router.routerDelegate;
 

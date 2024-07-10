@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
+import 'package:kro_banking/router/router.dart';
 import 'package:kro_banking/views/layout/components/header.dart';
 import 'package:kro_banking/views/layout/components/siderbar.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -38,6 +39,7 @@ class Layout extends StatelessWidget {
                   LayoutHeader(scaffoldKey: _scaffoldKey),
                   Expanded(
                       child: SingleChildScrollView(
+                    controller: AppRouter.scrollController,
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: context.pWidth(KContents.kHorizontalPad)),

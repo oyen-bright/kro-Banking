@@ -1,11 +1,13 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kro_banking/bloc/loading/loading_bloc.dart';
 import 'package:kro_banking/constants/app_constants.dart';
 import 'package:kro_banking/extentions/on_context.dart';
+import 'package:kro_banking/router/router.dart';
+import 'package:kro_banking/theme/app_colors.dart';
 import 'package:kro_banking/utils/get_greetings.dart';
 import 'package:kro_banking/widgets/linear_loader.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -21,11 +23,27 @@ class LayoutHeader extends StatefulWidget {
   State<LayoutHeader> createState() => _LayoutHeaderState();
 }
 
-bool showGreetings = true;
-
 class _LayoutHeaderState extends State<LayoutHeader> {
+  bool showGreetings = true;
+  bool showTitle = false;
+
+  String getRouteName() {
+    final router = GoRouter.of(context);
+    final Uri currentRoute = router.routeInformationProvider.value.uri;
+
+    final List<String> segments =
+        currentRoute.path.split('/').where((s) => s.isNotEmpty).toList();
+
+    if (segments.isEmpty) {
+      return "";
+    }
+
+    return (segments[0])[0].toUpperCase() + (segments[0]).substring(1);
+  }
+
   @override
   void initState() {
+    super.initState();
     Future.delayed(5.seconds, () {
       if (mounted) {
         setState(() {
@@ -33,14 +51,43 @@ class _LayoutHeaderState extends State<LayoutHeader> {
         });
       }
     });
-    super.initState();
+
+    AppRouter.scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    AppRouter.scrollController.removeListener(_scrollListener);
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (AppRouter.scrollController.position.pixels == 0 ||
+        AppRouter.scrollController.position.pixels < 20) {
+      setState(() {
+        showTitle = false;
+      });
+    } else if (!showTitle && AppRouter.scrollController.position.pixels > 25) {
+      setState(() {
+        showTitle = true;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: 500.milliseconds,
       height: kToolbarHeight + 0.5.sh,
-      color: context.theme.scaffoldBackgroundColor,
+      decoration: BoxDecoration(
+          color: showTitle
+              ? AppColors.kBgWhite
+              : context.theme.scaffoldBackgroundColor,
+          border: showTitle
+              ? Border(
+                  bottom: BorderSide(
+                      color: context.colorScheme.primary.withOpacity(0.1)))
+              : null),
       padding: EdgeInsets.symmetric(horizontal: context.pWidth(30)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -63,6 +110,12 @@ class _LayoutHeaderState extends State<LayoutHeader> {
                         fontSize:
                             context.textTheme.titleMedium!.fontSize! + 2.0),
                   ).animate().slideX(),
+                if (!showGreetings && showTitle)
+                  Text(
+                    getRouteName(),
+                    style: context.textTheme.headlineMedium
+                        ?.copyWith(fontWeight: FontWeight.w400),
+                  ).animate().slideY(),
                 const Spacer(),
                 IconButton(
                     onPressed: () =>
